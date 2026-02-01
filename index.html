@@ -1,0 +1,696 @@
+{
+  "name": "youknowtoomuch-site",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "14.2.5",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  }
+}/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true
+};
+module.exports = nextConfig;
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "noEmit": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "jsx": "preserve"
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
+}
+:root{
+  --green:#C7F11A;
+  --yellow:#E9DC4A;
+  --purple:#8B2CE2;
+  --deep:#2B0C46;
+  --ink:#101010;
+  --paper:#ffffff;
+
+  --max: 1120px;
+  --pad: clamp(18px, 4vw, 44px);
+  --r-xl: 28px;
+  --r-lg: 22px;
+}
+
+*{ box-sizing:border-box; }
+html,body{ padding:0; margin:0; }
+body{
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  color: var(--ink);
+  background: var(--green);
+}
+
+a{ color: inherit; text-decoration: none; }
+a:hover{ text-decoration: underline; }
+
+.wrap{ max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
+
+.section{
+  position: relative;
+  overflow:hidden;
+}
+
+.doodles{
+  position:absolute; inset:0;
+  pointer-events:none;
+  opacity:.65;
+  background-repeat:no-repeat;
+  background-size: cover;
+  background-position:center;
+  mix-blend-mode: screen;
+  filter: contrast(1.05);
+  background-image: url('data:image/svg+xml;utf8,\
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">\
+<g fill="none" stroke="%23ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.85">\
+<path d="M60 170c120-60 220-50 320 10 80 50 150 60 240 40 120-28 170-10 250 40 90 55 200 55 300 0 90-50 200-70 360-30" />\
+<path d="M1030 120c40-35 95-35 135 0 40 35 40 90 0 125-40 35-95 35-135 0-40-35-40-90 0-125z" opacity="0.35"/>\
+<path d="M1180 140c55-55 145-55 200 0" opacity="0.35"/>\
+<path d="M1180 200c55-55 145-55 200 0" opacity="0.35"/>\
+<path d="M80 520c80-120 200-170 360-150 160 20 230 120 380 160 140 36 260-10 400-70 130-55 260-60 420 10" opacity="0.35"/>\
+</g></svg>');
+}
+
+.topbar{
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 20px 0;
+  position: relative;
+  z-index: 2;
+}
+
+.brand{
+  display:flex; align-items:center; gap:10px;
+  font-weight: 800;
+  letter-spacing:.2px;
+}
+.mark{
+  width: 26px; height: 26px; border-radius: 999px;
+  display:grid; place-items:center;
+  background:#000; color:#fff;
+  font-size: 14px;
+}
+
+.nav{
+  display:flex; gap: 14px;
+  font-weight: 700;
+  font-size: 14px;
+}
+.nav a{
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.18);
+}
+.nav a:hover{ background: rgba(255,255,255,.28); }
+
+.hero{
+  padding: 14px 0 42px;
+}
+.heroGrid{
+  display:grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: clamp(18px, 3vw, 42px);
+  align-items:center;
+  position:relative;
+  z-index:2;
+}
+.title{
+  font-size: clamp(56px, 7vw, 92px);
+  line-height: .9;
+  letter-spacing: .6px;
+  margin: 10px 0 10px;
+  font-weight: 900;
+}
+.subtitle{
+  font-size: clamp(18px, 2.2vw, 26px);
+  max-width: 46ch;
+  margin: 0 0 16px;
+}
+.small{
+  font-size: 12px;
+  line-height: 1.35;
+  opacity:.9;
+}
+
+.heroCard{
+  border-radius: 18px;
+  background: rgba(0,0,0,.07);
+  border: 2px solid rgba(255,255,255,.55);
+  min-height: 300px;
+  display:grid;
+  place-items:center;
+  position:relative;
+  overflow:hidden;
+}
+.heroCard::after{
+  content:"Hosts photo / cutout (add later)";
+  font-size: 12px;
+  opacity:.65;
+}
+
+.block{
+  padding: 44px 0 54px;
+}
+.center{
+  text-align:center;
+  position:relative;
+  z-index:2;
+}
+.h2{
+  font-size: clamp(26px, 3vw, 40px);
+  margin: 0 auto 18px;
+  max-width: 30ch;
+  font-weight: 800;
+}
+.video{
+  max-width: 820px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow:hidden;
+  border: 4px solid rgba(255,255,255,.55);
+  box-shadow: 0 10px 26px rgba(0,0,0,.12);
+  background: rgba(0,0,0,.09);
+}
+.videoInner{
+  aspect-ratio: 16/9;
+  display:grid;
+  place-items:center;
+  font-weight: 800;
+  opacity:.85;
+}
+.btnRow{
+  display:flex;
+  justify-content:center;
+  gap: 12px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-weight: 800;
+  background: #fff;
+  box-shadow: 0 10px 22px rgba(0,0,0,.16);
+}
+.btnSecondary{
+  background: rgba(255,255,255,.25);
+  box-shadow:none;
+  border: 1px solid rgba(255,255,255,.55);
+}
+
+.quotes{
+  padding: 44px 0 58px;
+  color:#fff;
+  background: linear-gradient(180deg, rgba(139,44,226,.86), rgba(43,12,70,.88));
+}
+.quoteTitle{
+  font-size: clamp(30px, 3.6vw, 52px);
+  text-align:center;
+  margin: 0 0 26px;
+  font-weight: 900;
+}
+.cards{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(14px, 2vw, 22px);
+}
+.card{
+  background: rgba(199,241,26,.92);
+  color:#152004;
+  border-radius: 22px;
+  padding: 22px 20px 18px;
+  box-shadow: 0 14px 28px rgba(0,0,0,.18);
+  min-height: 210px;
+  display:flex;
+  flex-direction:column;
+}
+.card p{
+  margin: 0 0 18px;
+  font-size: 18px;
+  line-height: 1.25;
+}
+.person{
+  margin-top:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  font-size: 13px;
+  font-weight: 900;
+}
+.avatar{
+  width: 44px; height: 44px;
+  border-radius: 999px;
+  background: rgba(0,0,0,.18);
+  border: 2px solid rgba(255,255,255,.6);
+  display:grid; place-items:center;
+  font-size: 11px;
+  color: rgba(255,255,255,.9);
+}
+
+.cta{
+  padding: 46px 0 56px;
+}
+.ctaGrid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  align-items:center;
+  max-width: 900px;
+  margin: 0 auto;
+  position:relative;
+  z-index:2;
+}
+.brain{
+  width: min(300px, 100%);
+  aspect-ratio: 1/1;
+  border-radius: 999px;
+  background: rgba(255,255,255,.14);
+  border: 3px solid rgba(255,255,255,.75);
+  display:grid; place-items:center;
+  justify-self:center;
+}
+.brain::after{ content:"Brain mark"; font-size:12px; opacity:.7; }
+
+.footer{
+  padding: 0 0 26px;
+}
+.pill{
+  max-width: 980px;
+  margin: 0 auto;
+  background: var(--purple);
+  border-radius: 999px;
+  padding: 14px 22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 14px;
+  box-shadow: 0 18px 34px rgba(0,0,0,.18);
+}
+
+.pageHeader{
+  padding: 26px 0 18px;
+  position:relative;
+  z-index:2;
+}
+.pageHeader h1{
+  margin: 0 0 6px;
+  font-size: clamp(30px, 4vw, 48px);
+}
+.pageHeader p{
+  margin: 0;
+  max-width: 70ch;
+  opacity:.9;
+}
+
+.gridList{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding-bottom: 46px;
+}
+.tile{
+  border-radius: 18px;
+  border: 2px solid rgba(255,255,255,.55);
+  background: rgba(0,0,0,.06);
+  padding: 16px;
+  min-height: 140px;
+}
+.badge{
+  display:inline-block;
+  font-weight: 900;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.25);
+  border: 1px solid rgba(255,255,255,.45);
+}
+
+.embedWrap{
+  border-radius: 18px;
+  overflow:hidden;
+  border: 2px solid rgba(255,255,255,.55);
+  background: rgba(255,255,255,.16);
+  height: min(78vh, 760px);
+}
+
+@media (max-width: 900px){
+  .heroGrid{ grid-template-columns: 1fr; }
+  .cards{ grid-template-columns: 1fr; }
+  .ctaGrid{ grid-template-columns: 1fr; text-align:center; }
+  .gridList{ grid-template-columns: 1fr; }
+}
+import "./../styles/globals.css";
+
+export const metadata = {
+  metadataBase: new URL("https://youknowtoomuch.media"),
+  title: {
+    default: "You Know Too Much Podcast",
+    template: "%s | You Know Too Much"
+  },
+  description:
+    "A podcast about hyper-niche knowledge in a know-it-all world. Hosted by mavenverse co-founders Pamala Buzick Kim and Eva McCloskey.",
+  openGraph: {
+    title: "You Know Too Much Podcast",
+    description: "A podcast about hyper-niche knowledge in a know-it-all world.",
+    url: "https://youknowtoomuch.media",
+    siteName: "You Know Too Much",
+    images: [{ url: "/og.jpg", width: 1200, height: 630 }],
+    locale: "en_US",
+    type: "website"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "You Know Too Much Podcast",
+    description: "A podcast about hyper-niche knowledge in a know-it-all world.",
+    images: ["/og.jpg"]
+  }
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <head>
+        {/* Podcast schema for Google + LLMs */}
+        <script
+          type="application/ld+json"
+          // @ts-ignore
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "PodcastSeries",
+              name: "You Know Too Much",
+              description:
+                "A podcast about hyper-niche knowledge in a know-it-all world.",
+              url: "https://youknowtoomuch.media",
+              publisher: { "@type": "Organization", name: "mavenverse" }
+            })
+          }}
+        />
+      </head>
+      <body>{children}</body>
+    </html>
+  );
+}
+          const YOUTUBE_URL = "https://www.youtube.com/"; // replace with your channel URL when ready
+
+export default function HomePage() {
+  return (
+    <>
+      {/* HERO */}
+      <section className="section hero" style={{ background: "var(--green)" }}>
+        <div className="doodles" aria-hidden="true" />
+        <div className="wrap">
+          <div className="topbar">
+            <div className="brand">
+              <div className="mark">m</div>
+              <div>mavenverse</div>
+            </div>
+            <nav className="nav">
+              <a href="/episodes">Episodes</a>
+              <a href="/guest">Be a Guest</a>
+              <a href={YOUTUBE_URL} target="_blank" rel="noreferrer">
+                YouTube
+              </a>
+            </nav>
+          </div>
+
+          <div className="heroGrid">
+            <div>
+              <h1 className="title">
+                YOU KNOW
+                <br />
+                TOO MUCH
+              </h1>
+              <p className="subtitle">
+                A podcast about hyper-niche knowledge in a know-it-all world.
+              </p>
+              <p className="small">
+                hosted by <br />
+                mavenverse co-founders <br />
+                <b>Pamala Buzick Kim</b> &nbsp;and&nbsp; <b>Eva McCloskey</b>
+              </p>
+            </div>
+
+            <div className="heroCard" aria-label="Hosts image placeholder" />
+          </div>
+        </div>
+      </section>
+
+      {/* EPISODE (TBD blocks for now) */}
+      <section className="section block" style={{ background: "var(--yellow)" }}>
+        <div className="doodles" aria-hidden="true" style={{ opacity: 0.5, mixBlendMode: "overlay" }} />
+        <div className="wrap center">
+          <h2 className="h2">
+            Everything you’ve ever wanted to know about that thing you didn’t
+            know about.
+          </h2>
+
+          <div className="video" aria-label="Latest episode placeholder">
+            <div className="videoInner">LATEST EPISODE — TBD</div>
+          </div>
+
+          <div className="btnRow">
+            <a className="btn" href={YOUTUBE_URL} target="_blank" rel="noreferrer">
+              Watch on YouTube
+            </a>
+            <a className="btn btnSecondary" href="/episodes">
+              View all episodes
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* QUOTES */}
+      <section className="section quotes">
+        <div className="wrap">
+          <h2 className="quoteTitle">“How do you even know that?”</h2>
+
+          <div className="cards">
+            <article className="card">
+              <p>
+                “My knowledge of the LinkedIn algorithm was gained against my
+                will out of pure survival!”
+              </p>
+              <div className="person">
+                <span>Cindy Gallop</span>
+                <span className="avatar">IMG</span>
+              </div>
+            </article>
+
+            <article className="card">
+              <p>
+                “I’ve become an expert on the building across from my apartment.
+                Is that weird?”
+              </p>
+              <div className="person">
+                <span>Amy Banks</span>
+                <span className="avatar">IMG</span>
+              </div>
+            </article>
+
+            <article className="card">
+              <p>
+                “I have been studying ideas for 34 years. And I think I may just
+                be starting to get it.”
+              </p>
+              <div className="person">
+                <span>Tom Christmann</span>
+                <span className="avatar">IMG</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="section cta" style={{ background: "var(--green)" }}>
+        <div className="doodles" aria-hidden="true" />
+        <div className="wrap">
+          <div className="ctaGrid">
+            <div className="brain" aria-label="Brain placeholder" />
+            <div>
+              <h2 className="title" style={{ fontSize: "clamp(44px,4.6vw,64px)", margin: 0 }}>
+                DYKTM?
+              </h2>
+              <p style={{ marginTop: 10, maxWidth: "55ch", lineHeight: 1.45 }}>
+                To be a guest or for more information about the show, reach out
+                or apply:
+                <br />
+                <a href="/guest" style={{ fontWeight: 900, textDecoration: "underline" }}>
+                  Guest application (Typeform)
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER PILL */}
+      <footer className="footer" style={{ background: "var(--green)" }}>
+        <div className="wrap">
+          <div className="pill" aria-label="Footer bar">
+            <div className="mark">m</div>
+            <div style={{ fontWeight: 900 }}>mavenverse</div>
+          </div>
+        </div>
+      </footer>
+    </>
+  );
+}
+          const episodes = [
+  { slug: "episode-1", title: "Episode 1 — TBD", status: "TBD" },
+  { slug: "episode-2", title: "Episode 2 — TBD", status: "TBD" },
+  { slug: "episode-3", title: "Episode 3 — TBD", status: "TBD" }
+];
+
+export default function EpisodesPage() {
+  return (
+    <section className="section" style={{ background: "var(--green)" }}>
+      <div className="doodles" aria-hidden="true" />
+      <div className="wrap">
+        <div className="topbar">
+          <div className="brand">
+            <div className="mark">m</div>
+            <div>mavenverse</div>
+          </div>
+          <nav className="nav">
+            <a href="/">Home</a>
+            <a href="/guest">Be a Guest</a>
+          </nav>
+        </div>
+
+        <header className="pageHeader">
+          <h1>Episodes</h1>
+          <p>
+            Episodes will publish on YouTube. For now, placeholders are live so
+            Google/LLMs see real structure from day one.
+          </p>
+        </header>
+
+        <div className="gridList">
+          {episodes.map((e) => (
+            <a key={e.slug} className="tile" href={`/episodes/${e.slug}`}>
+              <span className="badge">{e.status}</span>
+              <h3 style={{ margin: "10px 0 6px" }}>{e.title}</h3>
+              <p style={{ margin: 0, opacity: 0.85 }}>
+                Guest: TBD • Topic: TBD • Video: TBD
+              </p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+          type Props = { params: { slug: string } };
+
+export default function EpisodePage({ params }: Props) {
+  const { slug } = params;
+
+  return (
+    <section className="section" style={{ background: "var(--yellow)" }}>
+      <div className="doodles" aria-hidden="true" style={{ opacity: 0.5, mixBlendMode: "overlay" }} />
+      <div className="wrap">
+        <div className="topbar">
+          <div className="brand">
+            <div className="mark">m</div>
+            <div>mavenverse</div>
+          </div>
+          <nav className="nav">
+            <a href="/">Home</a>
+            <a href="/episodes">Episodes</a>
+            <a href="/guest">Be a Guest</a>
+          </nav>
+        </div>
+
+        <header className="pageHeader">
+          <h1>Episode — TBD</h1>
+          <p>
+            Slug: <b>{slug}</b> • Guest: TBD • Topic: TBD • YouTube: TBD
+          </p>
+        </header>
+
+        <div className="video" aria-label="Episode video placeholder">
+          <div className="videoInner">EPISODE VIDEO — TBD</div>
+        </div>
+
+        <div style={{ padding: "18px 0 46px", maxWidth: "70ch" }}>
+          <h2 style={{ margin: "18px 0 8px" }}>Summary</h2>
+          <p style={{ margin: 0, lineHeight: 1.55 }}>
+            TBD. When you have the episode, replace this with a real paragraph.
+            This is what search engines and AI can actually understand.
+          </p>
+
+          <h2 style={{ margin: "18px 0 8px" }}>Key links</h2>
+          <ul style={{ margin: 0, paddingLeft: 18, lineHeight: 1.6 }}>
+            <li>YouTube — TBD</li>
+            <li>Guest — TBD</li>
+            <li>References — TBD</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}
+          // Replace this with your real Typeform URL (embed link)
+const TYPEFORM_EMBED_URL = "https://form.typeform.com/to/XXXXXXXX";
+
+export default function GuestPage() {
+  return (
+    <section className="section" style={{ background: "var(--green)" }}>
+      <div className="doodles" aria-hidden="true" />
+      <div className="wrap">
+        <div className="topbar">
+          <div className="brand">
+            <div className="mark">m</div>
+            <div>mavenverse</div>
+          </div>
+          <nav className="nav">
+            <a href="/">Home</a>
+            <a href="/episodes">Episodes</a>
+          </nav>
+        </div>
+
+        <header className="pageHeader">
+          <h1>Be a Guest</h1>
+          <p>Apply via Typeform. If you don’t have the link yet, keep the placeholder and swap later.</p>
+        </header>
+
+        <div className="embedWrap" aria-label="Typeform embed">
+          <iframe
+            title="Guest Application"
+            src={TYPEFORM_EMBED_URL}
+            style={{ width: "100%", height: "100%", border: 0 }}
+            allow="camera; microphone; autoplay; encrypted-media;"
+          />
+        </div>
+
+        <div style={{ padding: "18px 0 46px", fontSize: 13, opacity: 0.9 }}>
+          If the embed doesn’t load, use the direct link:{" "}
+          <a href={TYPEFORM_EMBED_URL} target="_blank" rel="noreferrer" style={{ textDecoration: "underline" }}>
+            open Typeform
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+          

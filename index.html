@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>You Know Too Much Podcast</title>
-  <meta name="description" content="A podcast about hyper-niche knowledge in a know-it-all world." />
+  <meta name="description" content="A show celebrating the deeply specific, oddly delightful, occasionally unhinged things people know way too much about." />
 
   <style>
     :root{
@@ -123,7 +123,20 @@
       justify-content:space-between
     }
 
-    .cta{padding:46px 0 56px}
+    .cta{
+      padding:46px 0 56px;
+    }
+
+    /* Typeform embed styling */
+    .typeformBox{
+      max-width:900px;
+      margin:20px auto 0;
+      border-radius:18px;
+      overflow:hidden;
+      border:3px solid rgba(255,255,255,.55);
+      background:rgba(255,255,255,.18);
+      min-height:600px;
+    }
 
     .pill{
       max-width:980px;
@@ -140,6 +153,7 @@
     @media(max-width:900px){
       .grid{grid-template-columns:1fr}
       .cards{grid-template-columns:1fr}
+      .typeformBox{min-height:520px;}
     }
   </style>
 </head>
@@ -179,6 +193,7 @@
     </div>
   </div>
 
+  <!-- EPISODES -->
   <div id="episodes" class="section yellow">
     <div class="wrap" style="text-align:center">
       <h2 style="margin:0 0 18px;font-weight:950">Latest Episode</h2>
@@ -194,6 +209,7 @@
     </div>
   </div>
 
+  <!-- QUOTES -->
   <div class="quotes">
     <div class="wrap">
       <div class="qtitle">“How do you even know that?”</div>
@@ -201,12 +217,12 @@
       <div class="cards">
         <div class="tile">
           <p>“My knowledge of the LinkedIn algorithm was gained against my will out of pure survival!”</p>
-          <div class="person"><span>Cindy Gallop</span><span>IMG</span></div>
+          <div class="person"><span>Jane Smith</span><span>IMG</span></div>
         </div>
 
         <div class="tile">
           <p>“I’ve become an expert on the building across from my apartment. Is that weird?”</p>
-          <div class="person"><span>Amy Banks</span><span>IMG</span></div>
+          <div class="person"><span>John Smith</span><span>IMG</span></div>
         </div>
 
         <div class="tile">
@@ -217,15 +233,28 @@
     </div>
   </div>
 
+  <!-- GUEST FORM -->
   <div id="guest" class="cta">
     <div class="wrap" style="text-align:center">
-      <h2 style="margin:0 0 10px;font-size:clamp(44px,4.6vw,64px);font-weight:950">DYKTM?</h2>
-      <p style="margin:0;max-width:65ch;margin-inline:auto;line-height:1.45">
-        To be a guest, apply via Typeform (we’ll embed it once you have the link).
+      <h2 style="margin:0;font-size:clamp(44px,4.6vw,64px);font-weight:950">
+        Be a Guest
+      </h2>
+
+      <p style="margin:10px auto 0;max-width:65ch;line-height:1.45">
+        Got hyper-niche knowledge? Share it with us.
       </p>
+
+      <!-- Typeform Embed -->
+      <div class="typeformBox">
+        <div data-tf-live="01KFBY187YHT9EQ38XPJE2DBWG"></div>
+      </div>
     </div>
   </div>
 
+  <!-- Typeform script (loads the form) -->
+  <script src="//embed.typeform.com/next/embed.js"></script>
+
+  <!-- FOOTER -->
   <div class="wrap" style="padding-bottom:26px">
     <div class="pill">mavenverse</div>
   </div>

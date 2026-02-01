@@ -20,68 +20,11 @@
     *{box-sizing:border-box}
 
     body{
-      position: relative;
       margin:0;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
       color:var(--ink);
       background:var(--green);
     }
-
-    /* ===== Animated doodle background (real wallpaper) ===== */
-    .bgDoodle{
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-      opacity: 0.65;
-      mix-blend-mode: screen;
-    }
-
-    .bgDoodle svg{
-      width: 100%;
-      height: 100%;
-    }
-
-    .doodle{
-      fill: none;
-      stroke: rgba(255,255,255,0.9);
-      stroke-width: 3;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      vector-effect: non-scaling-stroke;
-
-      stroke-dasharray: 2200;
-      stroke-dashoffset: 2200;
-
-      animation: doodleDraw 10s linear infinite,
-                 doodleShow 40s linear infinite;
-      opacity: 0;
-    }
-
-    /* cycle timing (8 doodles rotating) */
-    .d1{ animation-delay: 0s,   0s; }
-    .d2{ animation-delay: 0s,   5s; }
-    .d3{ animation-delay: 0s,  10s; }
-    .d4{ animation-delay: 0s,  15s; }
-    .d5{ animation-delay: 0s,  20s; }
-    .d6{ animation-delay: 0s,  25s; }
-    .d7{ animation-delay: 0s,  30s; }
-    .d8{ animation-delay: 0s,  35s; }
-
-    @keyframes doodleDraw{
-      0%   { stroke-dashoffset: 2200; }
-      40%  { stroke-dashoffset: 0; }
-      100% { stroke-dashoffset: 0; }
-    }
-
-    @keyframes doodleShow{
-      0%   { opacity: 0; }
-      8%   { opacity: 1; }
-      20%  { opacity: 1; }
-      28%  { opacity: 0; }
-      100% { opacity: 0; }
-    }
-    /* ===== end background ===== */
 
     .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
     .top{display:flex;align-items:center;justify-content:space-between;padding:20px 0}
@@ -202,21 +145,6 @@
 </head>
 
 <body>
-
-  <!-- TRUE BACKGROUND DOODLE LAYER -->
-  <div class="bgDoodle" aria-hidden="true">
-    <svg viewBox="0 0 1600 900" preserveAspectRatio="none">
-      <!-- Placeholder doodles: swap these paths with whale/plane/dog/etc SVG paths -->
-      <path class="doodle d1" d="M50,450 C250,200 450,700 650,450 S1050,200 1550,450" />
-      <path class="doodle d2" d="M80,520 C240,420 340,620 520,520 S900,420 1040,520 S1360,620 1520,520" />
-      <path class="doodle d3" d="M60,300 C260,120 420,520 640,320 S980,120 1220,320 S1440,520 1540,340" />
-      <path class="doodle d4" d="M70,650 C250,520 350,760 560,650 S880,520 1060,650 S1360,760 1540,650" />
-      <path class="doodle d5" d="M120,160 C260,260 340,80 500,160 S820,260 980,160 S1220,80 1400,160 S1540,260 1560,150" />
-      <path class="doodle d6" d="M90,820 C260,700 340,900 520,820 S860,700 1040,820 S1320,900 1540,820" />
-      <path class="doodle d7" d="M60,100 C320,40 420,220 680,160 S1040,40 1300,160 S1500,260 1560,120" />
-      <path class="doodle d8" d="M60,440 C240,340 420,540 600,440 S960,340 1140,440 S1320,540 1500,440" />
-    </svg>
-  </div>
 
   <!-- SITE CONTENT -->
   <div class="wrap">

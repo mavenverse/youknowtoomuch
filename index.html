@@ -40,7 +40,66 @@
     .person{margin-top:auto;font-size:13px;font-weight:950;display:flex;justify-content:space-between}
     .cta{padding:46px 0 56px}
     .pill{max-width:980px;margin:0 auto;background:var(--purple);border-radius:999px;padding:14px 22px;display:flex;justify-content:center;gap:14px;font-weight:900}
-    @media(max-width:900px){.grid{grid-template-columns:1fr}.cards{grid-template-columns:1fr}}
+    @media(max-width:900px)/* ===== Animated doodle background ===== */
+.bgDoodle{
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.75;
+  mix-blend-mode: screen;
+}
+
+.bgDoodle svg{
+  width: 100%;
+  height: 100%;
+}
+
+.doodle{
+  fill: none;
+  stroke: rgba(255,255,255,0.9);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+
+  stroke-dasharray: 2200;
+  stroke-dashoffset: 2200;
+
+  animation: doodleDraw 10s linear infinite, doodleShow 40s linear infinite;
+  opacity: 0;
+}
+
+/* show one doodle at a time */
+.d1{ animation-delay: 0s,   0s; }
+.d2{ animation-delay: 0s,   5s; }
+.d3{ animation-delay: 0s,  10s; }
+.d4{ animation-delay: 0s,  15s; }
+.d5{ animation-delay: 0s,  20s; }
+.d6{ animation-delay: 0s,  25s; }
+.d7{ animation-delay: 0s,  30s; }
+.d8{ animation-delay: 0s,  35s; }
+
+@keyframes doodleDraw{
+  0%   { stroke-dashoffset: 2200; }
+  40%  { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes doodleShow{
+  0%   { opacity: 0; }
+  8%   { opacity: 1; }
+  20%  { opacity: 1; }
+  28%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* keep your page content above the background */
+.wrap, .section, .quotes, .cta, .hero{
+  position: relative;
+  z-index: 1;
+}
+/* ===== end doodle background ===== */{.grid{grid-template-columns:1fr}.cards{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -116,13 +175,13 @@
     <div class="wrap" style="text-align:center">
       <h2 style="margin:0 0 10px;font-size:clamp(44px,4.6vw,64px);font-weight:950">DYKTM?</h2>
       <p style="margin:0;max-width:65ch;margin-inline:auto;line-height:1.45">
-        To be a guest, apply via Typeform (we’ll embed it once you have the link).
+        To be a guest, submit here:
       </p>
     </div>
   </div>
 
   <div class="wrap" style="padding-bottom:26px">
-    <div class="pill"><span>mavenverse</span></div>
+    <div class="pill"><span>APPLY</span></div>
   </div>
 </body>
 </html>

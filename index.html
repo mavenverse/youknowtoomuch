@@ -3,157 +3,444 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>mavenverse</title>
+  <title>You Know Too Much</title>
 
   <style>
-    /* ====== COLORS (only change you asked for) ====== */
     :root{
-      --green: #C6EF19;
-      --yellow: #F4F25A; /* less orange */
-      --bg: #0b0b0b;
-      --fg: #ffffff;
-      --hairline: rgba(255,255,255,0.10);
-      --muted: rgba(255,255,255,0.75);
-      --r: 999px;
-      --max: 1100px;
+      --green: #C6EF19;          /* your key green */
+      --yellow: #F4F25A;         /* updated: less orange */
+      --purple: #A63AF6;         /* adjust if you have an exact purple */
+      --ink: #111111;
+      --white: #FFFFFF;
+
+      --max: 1120px;
+      --pad: 28px;
+      --pill: 999px;
     }
 
     *{ box-sizing:border-box; }
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      background: var(--bg);
-      color: var(--fg);
+      color: var(--ink);
+      background: var(--green);
     }
 
-    .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    img{ max-width:100%; display:block; }
+    a{ color: inherit; }
 
-    /* Keep your existing styles. These are only basics. */
-    .section{ padding: 96px 0; border-bottom: 1px solid var(--hairline); }
-
-    .subhead{
-      color: var(--muted);
-      max-width: 70ch;
-      line-height: 1.5;
-      margin: 14px 0 0 0;
+    .wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--pad);
     }
 
-    /* If you already have a YouTube-style pill, keep yours.
-       This exists so the footer CTA looks consistent. */
+    /* SECTION BASICS */
+    .section{
+      position: relative;
+      padding: 56px 0;
+      overflow: hidden;
+    }
+
+    /* Keep your doodle art as background images if you already have them.
+       You said "do not need to apply doodles", so this is optional. */
+    .doodle{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      opacity: 0.22;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      mix-blend-mode: lighten;
+    }
+
+    /* TYPE */
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.2fr 0.9fr;
+      gap: 40px;
+      align-items: center;
+    }
+    @media (max-width: 900px){
+      .hero-grid{ grid-template-columns: 1fr; }
+    }
+
+    .brand-row{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+    .brand-mark{
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.08);
+      display:grid;
+      place-items:center;
+      font-weight: 800;
+    }
+
+    .hero-title{
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 0.92;
+      font-size: clamp(44px, 7vw, 88px);
+      margin: 0 0 14px 0;
+    }
+
+    .hero-desc{
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.35;
+      max-width: 32ch;
+    }
+
+    .hosted-by{
+      margin-top: 18px;
+      font-size: 12px;
+      opacity: 0.85;
+      line-height: 1.35;
+    }
+
+    /* “PILL” BUTTON STYLE (matches your site vibe) */
     .pill{
       display:inline-flex;
       align-items:center;
-      padding: 10px 14px;
-      border-radius: var(--r);
+      justify-content:center;
+      gap: 10px;
+      padding: 12px 18px;
+      border-radius: var(--pill);
+      background: rgba(0,0,0,0.10);
+      color: var(--ink);
       text-decoration:none;
-      font-weight:600;
-      font-size:14px;
-      line-height:1;
+      font-weight: 700;
+      border: 1px solid rgba(0,0,0,0.14);
     }
-    .pill--accent{
-      background: var(--yellow);
-      color: #0b0b0b;
+    .pill:hover{ opacity: 0.9; }
+
+    .pill--purple{
+      background: var(--purple);
+      color: var(--white);
+      border-color: rgba(255,255,255,0.18);
     }
 
-    /* ====== FOOTER (replaces last mavenverse pill) ====== */
-    .site-footer{
-      padding: 70px 0;
-      border-top: 1px solid var(--hairline);
+    .pill--white{
+      background: var(--white);
+      color: var(--ink);
+      border-color: rgba(0,0,0,0.12);
     }
-    .footer-inner{
-      max-width: var(--max);
+
+    /* SECTION 2 (YELLOW) */
+    .bg-yellow{ background: var(--yellow); }
+    .center{
+      text-align:center;
+    }
+    .h2{
+      font-family: ui-serif, Georgia, serif;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      font-size: clamp(22px, 3.2vw, 34px);
+      margin: 0 0 22px 0;
+    }
+
+    .video-shell{
+      max-width: 760px;
       margin: 0 auto;
-      padding: 0 24px;
-      display:flex;
-      justify-content: space-between;
-      align-items:flex-start;
-      gap: 40px;
-      flex-wrap: wrap;
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.20);
+      border: 1px solid rgba(0,0,0,0.10);
     }
-    .footer-brand{
-      font-weight: 700;
+    .video-shell iframe{
+      width:100%;
+      aspect-ratio: 16/9;
+      border:0;
+      display:block;
+    }
+
+    .caption{
+      font-family: ui-serif, Georgia, serif;
+      font-size: 20px;
+      margin-top: 18px;
+    }
+
+    /* SECTION 3 (PURPLE QUOTES) */
+    .bg-purple{
+      background: linear-gradient(180deg, #7E23E9 0%, #5B1BBF 100%);
+      color: var(--white);
+    }
+
+    .quote-title{
+      font-family: ui-serif, Georgia, serif;
+      font-size: clamp(26px, 4vw, 44px);
+      margin: 0 0 24px 0;
+      font-weight: 600;
+    }
+
+    .quote-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      align-items: stretch;
+    }
+    @media (max-width: 900px){
+      .quote-grid{ grid-template-columns: 1fr; }
+    }
+
+    .quote-card{
+      background: rgba(198,239,25,0.92);
+      color: var(--ink);
+      border-radius: 18px;
+      padding: 18px 18px 16px 18px;
+      min-height: 160px;
+      display:flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .quote-text{
+      font-family: ui-serif, Georgia, serif;
       font-size: 16px;
-      color: var(--green);
+      line-height: 1.35;
+      margin: 0 0 14px 0;
+    }
+
+    .quote-person{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .avatar{
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.18);
+      flex: 0 0 auto;
+      overflow:hidden;
+    }
+
+    /* SECTION 4 (GREEN DY(K)TM) */
+    .dytm-grid{
+      display:grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 28px;
+      align-items: center;
+    }
+    @media (max-width: 900px){
+      .dytm-grid{ grid-template-columns: 1fr; }
+    }
+
+    .big-word{
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      font-size: clamp(34px, 5vw, 56px);
+      margin: 0 0 12px 0;
+    }
+    .small{
+      margin:0;
+      max-width: 52ch;
+      line-height: 1.45;
+      font-size: 14px;
+    }
+
+    /* FOOTER (replaces the last mavenverse pill) */
+    footer{
+      padding: 26px 0 40px 0;
+      background: transparent;
+    }
+    .footer-pill{
+      width: 100%;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 18px;
+      border-radius: var(--pill);
+      background: var(--purple);
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    .footer-left{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      font-weight: 800;
       letter-spacing: -0.02em;
     }
-    .footer-tagline{
-      margin-top: 10px;
-      font-size: 14px;
-      color: var(--muted);
-      max-width: 380px;
-      line-height: 1.4;
+    .footer-social{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      opacity: 0.95;
+      font-weight: 700;
+      font-size: 13px;
     }
+    .footer-social a{
+      color: var(--white);
+      text-decoration: none;
+      opacity: 0.9;
+    }
+    .footer-social a:hover{ opacity: 1; }
+
   </style>
 </head>
 
 <body>
 
-  <!-- ====== SECTION 1 (keep your original layout; only subhead text changed) ====== -->
-  <section class="section" id="top">
+  <!-- SECTION 1 (GREEN HERO) -->
+  <section class="section" style="background: var(--green);">
+    <!-- optional doodle background:
+    <div class="doodle" style="background-image:url('assets/doodles-hero.png')"></div>
+    -->
     <div class="wrap">
-      <!-- Keep your existing headline/hero stuff -->
-      <h1 style="margin:0; letter-spacing:-0.04em;">mavenverse</h1>
+      <div class="hero-grid">
 
-      <!-- ONLY CHANGE: updated description line -->
-      <p class="subhead">
-        A show celebrating the deeply specific, oddly delightful, occasionally unhinged things people know way too much about.
-      </p>
+        <div>
+          <div class="brand-row">
+            <div class="brand-mark">m</div>
+            <div>mavenverse</div>
+          </div>
 
-      <!-- Keep your existing buttons; ensure yellow uses --yellow -->
-      <div style="margin-top:24px; display:flex; gap:12px; flex-wrap:wrap;">
-        <a class="pill pill--accent" href="https://mavenverse.typeform.com/inquiry" target="_blank" rel="noopener noreferrer">
-          Contact
-        </a>
-        <a class="pill" style="border:1px solid var(--hairline); color:var(--fg);" href="#section2">
-          Learn more
-        </a>
+          <h1 class="hero-title">YOU KNOW<br/>TOO MUCH</h1>
+
+          <!-- UPDATED DESCRIPTION LINE (your request) -->
+          <p class="hero-desc">
+            A show celebrating the deeply specific, oddly delightful, occasionally unhinged things people know way too much about.
+          </p>
+
+          <div class="hosted-by">
+            hosted by<br/>
+            mavenverse co-founders<br/>
+            <strong>Pamala Buzick Kim</strong> &amp; <strong>Eva McCloskey</strong>
+          </div>
+
+          <div style="margin-top:22px; display:flex; gap:12px; flex-wrap:wrap;">
+            <a class="pill pill--white" href="#latest">Latest episode</a>
+            <a class="pill pill--white" href="https://mavenverse.typeform.com/inquiry" target="_blank" rel="noopener noreferrer">
+              Be a guest
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <!-- Replace with your hero hosts image -->
+          <img src="assets/hosts.png" alt="Hosts" />
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ====== SECTION 2 ====== -->
-  <section class="section" id="section2">
-    <div class="wrap">
-      <!-- Replace with your original section 2 content -->
-      <h2 style="margin:0; letter-spacing:-0.03em;">Section 2</h2>
-      <p class="subhead">Paste your original content here.</p>
-    </div>
-  </section>
+  <!-- SECTION 2 (YELLOW: LATEST EPISODE) -->
+  <section class="section bg-yellow" id="latest">
+    <!-- optional doodle background:
+    <div class="doodle" style="background-image:url('assets/doodles-yellow.png')"></div>
+    -->
+    <div class="wrap center">
+      <div class="h2">Everything you’ve ever wanted to know<br/>about that thing you didn’t know about.</div>
 
-  <!-- ====== SECTION 3 ====== -->
-  <section class="section" id="section3">
-    <div class="wrap">
-      <!-- Replace with your original section 3 content -->
-      <h2 style="margin:0; letter-spacing:-0.03em;">Section 3</h2>
-      <p class="subhead">Paste your original content here.</p>
-    </div>
-  </section>
-
-  <!-- ====== SECTION 4 ====== -->
-  <section class="section" id="section4">
-    <div class="wrap">
-      <!-- Replace with your original section 4 content -->
-      <h2 style="margin:0; letter-spacing:-0.03em;">Section 4</h2>
-      <p class="subhead">Paste your original content here.</p>
-    </div>
-  </section>
-
-  <!-- ====== FOOTER (this is what replaces the last mavenverse pill element) ====== -->
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div>
-        <div class="footer-brand">mavenverse</div>
-        <p class="footer-tagline">
-          A show celebrating the deeply specific, oddly delightful, occasionally unhinged things people know way too much about.
-        </p>
+      <div class="video-shell">
+        <!-- Replace the src with your real YouTube embed -->
+        <iframe
+          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+          title="Latest episode"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
       </div>
 
-      <a class="pill pill--accent"
-         href="https://mavenverse.typeform.com/inquiry"
-         target="_blank"
-         rel="noopener noreferrer">
-        Contact
-      </a>
+      <div class="caption">
+        Latest YKTM Episode: <span style="text-decoration: underline;">Ideas with Tom Christmann</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 (PURPLE: QUOTES) -->
+  <section class="section bg-purple">
+    <div class="wrap">
+      <div class="quote-title">“How do you even know that?”</div>
+
+      <div class="quote-grid">
+        <div class="quote-card">
+          <p class="quote-text">“My knowledge of the LinkedIn algorithm was gained against my will out of pure survival!”</p>
+          <div class="quote-person">
+            <span>Cindy Gallop</span>
+            <div class="avatar"><img src="assets/avatar-1.jpg" alt="" /></div>
+          </div>
+        </div>
+
+        <div class="quote-card">
+          <p class="quote-text">“I’ve become an expert on the building across from my apartment. Is that weird?”</p>
+          <div class="quote-person">
+            <span>Amy Banks</span>
+            <div class="avatar"><img src="assets/avatar-2.jpg" alt="" /></div>
+          </div>
+        </div>
+
+        <div class="quote-card">
+          <p class="quote-text">“I have been studying ideas for 34 years. And I think I may just be starting to get it.”</p>
+          <div class="quote-person">
+            <span>Tom Christmann</span>
+            <div class="avatar"><img src="assets/avatar-3.jpg" alt="" /></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 (GREEN: DY(K)TM + CONTACT) -->
+  <section class="section" style="background: var(--green);">
+    <!-- optional doodle background:
+    <div class="doodle" style="background-image:url('assets/doodles-green-2.png')"></div>
+    -->
+    <div class="wrap">
+      <div class="dytm-grid">
+        <div>
+          <!-- Replace with your brain doodle image -->
+          <img src="assets/brain.png" alt="Brain doodle" style="max-width:320px;" />
+        </div>
+
+        <div>
+          <div class="big-word">DYKTM?</div>
+          <p class="small">
+            To be a guest or for more information about the show, reach out.
+          </p>
+
+          <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
+            <a class="pill pill--purple" href="https://mavenverse.typeform.com/inquiry" target="_blank" rel="noopener noreferrer">
+              Contact form
+            </a>
+          </div>
+
+          <!-- If you still want the email visible as text, bots will scrape it.
+               Since you switched to Typeform, keep email OFF the page. -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (replaces the bottom mavenverse pill) -->
+  <footer>
+    <div class="wrap">
+      <div class="footer-pill">
+        <div class="footer-left">
+          <span style="display:inline-grid; place-items:center; width:26px; height:26px; border-radius:50%; background:rgba(0,0,0,0.18);">m</span>
+          <span>mavenverse</span>
+        </div>
+
+        <div class="footer-social">
+          <!-- Replace with your real links -->
+          <a href="#" aria-label="Instagram">IG</a>
+          <a href="#" aria-label="TikTok">TT</a>
+          <a href="#" aria-label="YouTube">YT</a>
+          <a href="https://mavenverse.typeform.com/inquiry" target="_blank" rel="noopener noreferrer">Contact</a>
+        </div>
+      </div>
     </div>
   </footer>
 

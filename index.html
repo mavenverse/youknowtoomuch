@@ -1,283 +1,103 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>You Know Too Much Podcast</title>
-  <meta name="description" content="A show celebrating the deeply specific, oddly delightful, occasionally unhinged things people know way too much about." />
-
-  <style>
-    :root{
-      --green:#C6EF19;
-      --yellow:#E9DC4A;
-      --purple:#8B2CE2;
-      --deep:#2B0C46;
-      --ink:#101010;
-      --max:1120px;
-      --pad:clamp(18px, 4vw, 44px);
-    }
-
-    *{box-sizing:border-box}
-
-    body{
-      margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      color:var(--ink);
-      background:var(--green);
-    }
-
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
-    .top{display:flex;align-items:center;justify-content:space-between;padding:20px 0}
-    .brand{display:flex;align-items:center;gap:10px;font-weight:900}
-    .mark{
-      width:26px;height:26px;border-radius:999px;
-      background:#000;color:#fff;
-      display:grid;place-items:center;
-      font-size:14px
-    }
-    .nav a{
-      margin-left:10px;
-      padding:8px 10px;
-      border-radius:999px;
-      background:rgba(255,255,255,.18);
-      text-decoration:none;
-      font-weight:800
-    }
-
-    .hero{padding:10px 0 42px}
-    h1{font-size:clamp(56px,7vw,92px);line-height:.9;margin:10px 0;font-weight:950}
-    .sub{font-size:clamp(18px,2.2vw,26px);max-width:48ch}
-    .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:center}
-    .card{
-      border-radius:18px;
-      background:rgba(0,0,0,.07);
-      border:2px solid rgba(255,255,255,.55);
-      min-height:300px;
-      display:grid;
-      place-items:center
-    }
-
-    .section{padding:44px 0 54px}
-    .yellow{background:var(--yellow)}
-
-    .video{
-      max-width:820px;
-      margin:0 auto;
-      border-radius:12px;
-      overflow:hidden;
-      border:4px solid rgba(255,255,255,.55);
-      background:rgba(0,0,0,.09)
-    }
-    .videoInner{
-      aspect-ratio:16/9;
-      display:grid;
-      place-items:center;
-      font-weight:900;
-      opacity:.9
-    }
-
-    .btns{
-      display:flex;
-      justify-content:center;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-top:16px
-    }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:10px 14px;
-      border-radius:999px;
-      font-weight:900;
-      background:#fff;
-      text-decoration:none
-    }
-
-    .quotes{
-      background:linear-gradient(180deg, rgba(139,44,226,.86), rgba(43,12,70,.88));
-      color:#fff;
-      padding:44px 0 58px
-    }
-    .qtitle{
-      text-align:center;
-      font-size:clamp(30px,3.6vw,52px);
-      margin:0 0 26px;
-      font-weight:950
-    }
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .tile{
-      background:rgba(199,241,26,.92);
-      color:#152004;
-      border-radius:22px;
-      padding:22px;
-      min-height:210px;
-      display:flex;
-      flex-direction:column
-    }
-    .person{
-      margin-top:auto;
-      font-size:13px;
-      font-weight:950;
-      display:flex;
-      justify-content:space-between
-    }
-
-    .cta{
-      padding:46px 0 56px;
-    }
-
-    /* Typeform embed styling */
-    .typeformBox{
-      max-width:900px;
-      margin:20px auto 0;
-      border-radius:18px;
-      overflow:hidden;
-      border:3px solid rgba(255,255,255,.55);
-      background:rgba(255,255,255,.18);
-      min-height:600px;
-    }
-
-    .pill{
-      max-width:980px;
-      margin:0 auto;
-      background:var(--purple);
-      border-radius:999px;
-      padding:14px 22px;
-      display:flex;
-      justify-content:center;
-      gap:14px;
-      font-weight:900
-    }
-
-    @media(max-width:900px){
-      .grid{grid-template-columns:1fr}
-      .cards{grid-template-columns:1fr}
-      .typeformBox{min-height:520px;}
-    }
-  </style>
-</head>
-
-<body>
-
-  <!-- SITE CONTENT -->
-  <div class="wrap">
-    <div class="top">
-      <div class="brand">
-        <div class="mark">m</div>
-        <div>mavenverse</div>
-      </div>
-
-      <div class="nav">
-        <a href="#episodes">Episodes</a>
-        <a href="#guest">Be a Guest</a>
-        <a href="https://www.youtube.com/" target="_blank" rel="noreferrer">YouTube</a>
-      </div>
-    </div>
-
-    <div class="hero">
-      <div class="grid">
-        <div>
-          <h1>YOU KNOW<br/>TOO MUCH</h1>
-          <div class="sub">A show celebrating the deeply specific, oddly delightful, occasionally unhinged things people know way too much about.</div>
-
-          <p style="font-size:12px;line-height:1.35;opacity:.9;margin-top:14px">
-            hosted by<br/>
-            mavenverse founders<br/>
-            <b>Pamala Buzick Kim</b> and <b>Eva McCloskey</b>
-          </p>
-        </div>
-
-        <div class="card">Hosts photo / cutout (add later)</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- EPISODES -->
-  <div id="episodes" class="section yellow">
-    <div class="wrap" style="text-align:center">
-      <h2 style="margin:0 0 18px;font-weight:950">Latest Episode</h2>
-      <div class="video">
-        <div class="videoInner">LATEST EPISODE — TBD</div>
-      </div>
-
-      <div class="btns">
-        <a class="btn" href="https://www.youtube.com/" target="_blank" rel="noreferrer">
-          Watch on YouTube
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- QUOTES -->
-  <div class="quotes">
-    <div class="wrap">
-      <div class="qtitle">“How do you even know that?”</div>
-
-      <div class="cards">
-        <div class="tile">
-          <p>“My knowledge of the LinkedIn algorithm was gained against my will out of pure survival!”</p>
-          <div class="person"><span>Jane Smith</span><span>IMG</span></div>
-        </div>
-
-        <div class="tile">
-          <p>“I’ve become an expert on the building across from my apartment. Is that weird?”</p>
-          <div class="person"><span>John Smith</span><span>IMG</span></div>
-        </div>
-
-        <div class="tile">
-          <p>“I have been studying ideas for 34 years. And I think I may just be starting to get it.”</p>
-          <div class="person"><span>Tom Christmann</span><span>IMG</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- GUEST FORM -->
-  <div id="guest" class="cta">
-    <div class="wrap" style="text-align:center">
-      <h2 style="margin:0;font-size:clamp(44px,4.6vw,64px);font-weight:950">
-        Be a Guest
-      </h2>
-
-      <p style="margin:10px auto 0;max-width:65ch;line-height:1.45">
-        Got hyper-niche knowledge? Share it with us.
-      </p>
-
-      <!-- Typeform Embed -->
-      <div class="typeformBox">
-        <div data-tf-live="01KFBY187YHT9EQ38XPJE2DBWG"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Typeform script (loads the form) -->
-  <script src="//embed.typeform.com/next/embed.js"></script>
-
-  <!-- FOOTER -->
 <footer class="site-footer">
   <div class="footer-inner">
 
+    <!-- Brand + Description -->
     <div class="footer-left">
       <span class="footer-brand">mavenverse</span>
       <p class="footer-tagline">
-        Community activation infrastructure.
+        A show celebrating the deeply specific, oddly delightful,
+        occasionally unhinged things people know way too much about.
       </p>
     </div>
 
+    <!-- Links -->
     <div class="footer-links">
-      <a href="/about">About</a>
-      <a href="/communities">Communities</a>
-      <a href="/brands">Brands</a>
-      <a href="/contact">Contact</a>
+      <a href="#about">About</a>
+      <a href="#episodes">Episodes</a>
+      <a href="#guests">Guests</a>
+      <a href="#contact">Contact</a>
     </div>
 
+    <!-- Contact -->
     <div class="footer-right">
-      <a href="mailto:hello@mavenverse.com">hello@mavenverse.com</a>
+      <a class="footer-email" href="mailto:hello@mavenverse.com">
+        hello@mavenverse.com
+      </a>
       <p class="footer-copy">© 2026 mavenverse</p>
     </div>
 
   </div>
 </footer>
-</body>
-</html>
+
+<style>
+  .site-footer {
+    padding: 90px 24px;
+    background: #0b0b0b;
+    color: #ffffff;
+    border-top: 1px solid rgba(255,255,255,0.10);
+  }
+
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 60px;
+    flex-wrap: wrap;
+  }
+
+  .footer-brand {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: #C6EF19; /* your green */
+  }
+
+  .footer-tagline {
+    margin-top: 14px;
+    font-size: 14px;
+    line-height: 1.5;
+    opacity: 0.78;
+    max-width: 320px;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    opacity: 0.75;
+    transition: opacity 0.2s ease;
+  }
+
+  .footer-links a:hover {
+    opacity: 1;
+    color: #F4F25A; /* softer yellow */
+  }
+
+  .footer-right {
+    text-align: right;
+    font-size: 14px;
+  }
+
+  .footer-email {
+    color: #F4F25A; /* less orange, matches green */
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .footer-email:hover {
+    opacity: 0.85;
+  }
+
+  .footer-copy {
+    margin-top: 14px;
+    opacity: 0.55;
+    font-size: 13px;
+  }
+</style>

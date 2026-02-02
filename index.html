@@ -75,6 +75,7 @@
 
     /* original doodle helper sizes (kept for squiggles) */
     .doodle-xl{ width: 760px; }
+    .doodle-lg{ width: 520px; } /* you referenced this class */
 
     @media (max-width: 900px){
       .bg-doodle{ opacity: 0.55; }
@@ -83,6 +84,7 @@
       .sz-2{ width: 260px; }
       .sz-1{ width: 220px; }
       .doodle-xl{ width: 520px; }
+      .doodle-lg{ width: 420px; }
     }
 
     /* ---------------- HERO ---------------- */
@@ -330,9 +332,10 @@
       <img class="bg-doodle doodle-xl" src="assets/squiggle.png"
            style="top:-40px; left:-180px; opacity:0.55;">
 
-      <!-- brain: top-right near hosts (example layout) -->
- <img class="bg-doodle doodle-lg" src="assets/brain.png"
-     style="top:40px; left:55%; width:520px; opacity:0.70;">
+      <!-- brain placement restored -->
+      <img class="bg-doodle doodle-lg" src="assets/brain.png"
+           style="top:40px; left:55%; width:520px; opacity:0.70;">
+    </div>
 
     <div class="wrap">
       <div class="hero-grid">
@@ -374,7 +377,8 @@
     <div class="bg-layer">
 
       <img class="bg-doodle sz-4" src="assets/labubu.png"
-     style="left:6%; top:-240px; opacity:0.90;">
+           style="left:6%; top:-240px; opacity:0.90;">
+
       <!-- KEEP squiggle where it was -->
       <img class="bg-doodle doodle-xl" src="assets/squiggle.png"
            style="top:-20px; right:-180px; transform:scaleX(-1); opacity:0.45;">
@@ -383,11 +387,9 @@
       <img class="bg-doodle sz-3" src="assets/baby.png"
            style="right:6%; top:58%; opacity:0.90;">
 
-      <!-- OPTIONAL: sneakers was in your mock; include if you want it here instead of burnttang -->
-            <!-- sneakers: bottom-left -->
+      <!-- sneakers: bottom-left -->
       <img class="bg-doodle sz-2" src="assets/sneakers.png"
            style="left:4%; bottom:6%; opacity:0.85;">
-      <!-- <img class="bg-doodle sz-2" src="assets/sneakers.png" style="left:4%; bottom:8%; opacity:0.85;"> -->
     </div>
 
     <div class="wrap center">
@@ -466,7 +468,7 @@
       <img class="bg-doodle sz-3" src="assets/brain.png"
            style="left:10%; top:18%; opacity:0.85;">
 
-      <!-- dog: split across green->black fold -->
+      <!-- dog -->
       <img class="bg-doodle sz-3" src="assets/dog.png"
            style="right:-6%; top:40%; opacity:0.85;">
     </div>

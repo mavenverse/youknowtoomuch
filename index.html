@@ -61,22 +61,28 @@
 
     .bg-doodle{
       position: absolute;
-      opacity: 0.45;
+      opacity: 0.85;
       filter: brightness(0) invert(1) contrast(1.25);
       mix-blend-mode: normal;
-      max-width: none; /* IMPORTANT: allow big doodles */
+      max-width: none;
     }
 
-    .doodle-sm{ width: 180px; }
-    .doodle-md{ width: 320px; }
-    .doodle-lg{ width: 520px; }
+    /* size tokens (tune here if needed) */
+    .sz-1{ width: 280px; }
+    .sz-2{ width: 360px; }
+    .sz-3{ width: 460px; }
+    .sz-4{ width: 620px; }
+
+    /* original doodle helper sizes (kept for squiggles) */
     .doodle-xl{ width: 760px; }
 
     @media (max-width: 900px){
-      .bg-doodle{ opacity: 0.35; }
+      .bg-doodle{ opacity: 0.55; }
+      .sz-4{ width: 420px; }
+      .sz-3{ width: 340px; }
+      .sz-2{ width: 260px; }
+      .sz-1{ width: 220px; }
       .doodle-xl{ width: 520px; }
-      .doodle-lg{ width: 420px; }
-      .doodle-md{ width: 300px; }
     }
 
     /* ---------------- HERO ---------------- */
@@ -320,10 +326,17 @@
   <section class="section" style="background: var(--green);" id="top">
 
     <div class="bg-layer">
-      <img class="bg-doodle doodle-xl" src="assets/squiggle.png" style="top:-40px; left:-180px; opacity:0.55;">
-      <img class="bg-doodle doodle-lg" src="assets/brain.png" style="top:40px; left:55%; width:520px; opacity:0.70;">
-      <!-- Labubu: between green/yellow fold near buttons -->
-      <img class="bg-doodle" src="assets/labubu.png" style="left:-44%; bottom:-140px; width:890px; opacity:100;">
+      <!-- KEEP squiggle where it was -->
+      <img class="bg-doodle doodle-xl" src="assets/squiggle.png"
+           style="top:-40px; left:-180px; opacity:0.55;">
+
+      <!-- brain: top-right near hosts (example layout) -->
+      <img class="bg-doodle sz-3" src="assets/brain.png"
+           style="top:-6%; right:6%; opacity:0.75;">
+
+      <!-- labubu: near green/yellow fold left-ish, near buttons area -->
+      <img class="bg-doodle sz-3" src="assets/labubu.png"
+           style="left:6%; bottom:-18%; opacity:0.85;">
     </div>
 
     <div class="wrap">
@@ -364,11 +377,16 @@
   <section class="section bg-yellow" id="latest">
 
     <div class="bg-layer">
-      <img class="bg-doodle doodle-xl" src="assets/squiggle.png" style="top:-20px; right:-180px; transform:scaleX(-1); opacity:0.45;">
-      <!-- Rock: 3x bigger, right of YouTube -->
-      <img class="bg-doodle" src="assets/rock.png" style="right:-160px; top:120px; width:980px; opacity:100;">
-      <!-- Baby: left of YouTube, slightly lower than rock -->
-      <img class="bg-doodle" src="assets/baby.png" style="left:-120px; top:190px; width:720px; opacity:0.95;">
+      <!-- KEEP squiggle where it was -->
+      <img class="bg-doodle doodle-xl" src="assets/squiggle.png"
+           style="top:-20px; right:-180px; transform:scaleX(-1); opacity:0.45;">
+
+      <!-- baby: right side of YouTube section -->
+      <img class="bg-doodle sz-3" src="assets/baby.png"
+           style="right:6%; top:34%; opacity:0.90;">
+
+      <!-- OPTIONAL: sneakers was in your mock; include if you want it here instead of purple -->
+      <!-- <img class="bg-doodle sz-2" src="assets/sneakers.png" style="left:4%; bottom:8%; opacity:0.85;"> -->
     </div>
 
     <div class="wrap center">
@@ -395,9 +413,17 @@
   <section class="section bg-purple">
 
     <div class="bg-layer">
-      <img class="bg-doodle doodle-xl" src="assets/squiggle.png" style="top:-80px; left:-200px; opacity:0.40;">
-      <!-- Dinner: fall off page to right of quote boxes -->
-      <img class="bg-doodle" src="assets/dinner.png" style="right:-260px; top:140px; width:800px; opacity:0.60;">
+      <!-- KEEP squiggle where it was -->
+      <img class="bg-doodle doodle-xl" src="assets/squiggle.png"
+           style="top:-80px; left:-200px; opacity:0.40;">
+
+      <!-- sneakers: bottom-left -->
+      <img class="bg-doodle sz-2" src="assets/sneakers.png"
+           style="left:4%; bottom:6%; opacity:0.85;">
+
+      <!-- dinner: falling off page to the right -->
+      <img class="bg-doodle sz-4" src="assets/dinner.png"
+           style="right:-18%; top:14%; opacity:0.75;">
     </div>
 
     <div class="wrap">
@@ -435,12 +461,17 @@
   <section class="section" style="background: var(--green);" id="guest">
 
     <div class="bg-layer">
-      <!-- Whale: placement good, 2x bigger -->
-      <img class="bg-doodle" src="assets/whale.png" style="bottom:-120px; left:-220px; width:1040px; opacity:0.80;">
-      <!-- Brain: left side of DYKTM title -->
-      <img class="bg-doodle" src="assets/brain.png" style="top:40px; left:-120px; width:560px; opacity:0.70;">
-      <!-- Dog: split evenly between green->black fold (centered on bottom edge) -->
-      <img class="bg-doodle" src="assets/dog.png" style="left:50%; bottom:-120px; transform:translateX(-50%); width:720px; opacity:0.75;">
+      <!-- whale: bottom-left, bigger -->
+      <img class="bg-doodle sz-4" src="assets/whale.png"
+           style="left:2%; bottom:-20%; opacity:0.90;">
+
+      <!-- brain: left side of DYKTM title -->
+      <img class="bg-doodle sz-3" src="assets/brain.png"
+           style="left:10%; top:18%; opacity:0.85;">
+
+      <!-- dog: split across green->black fold -->
+      <img class="bg-doodle sz-3" src="assets/dog.png"
+           style="right:6%; top:40%; opacity:0.85;">
     </div>
 
     <div class="wrap">

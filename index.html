@@ -8,8 +8,7 @@
   <!-- Favicons -->
   <link rel="icon" type="image/png" sizes="32x32" href="assets/bfav32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/bfav16.png">
-
-  <!-- Apple Touch Icon (iPhone home screen) -->
+  <!-- optional; only include if you actually have this file -->
   <link rel="apple-touch-icon" sizes="180x180" href="assets/bfav180.png">
 
   <style>
@@ -26,8 +25,6 @@
       --pad: 28px;
       --r: 999px;
     }
-  </style>
-</head>
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
@@ -327,8 +324,8 @@
     .footer-links a:hover{ color: var(--tangerine); }
 
     /* ---------------- LABUBU (DESKTOP DEFAULT) ----------------
-       Put it back on desktop by giving it an explicit top here.
-       Inline styles only set left/transform/opacity; top lives in CSS. */
+       Desktop stays perfect: only top is set here.
+       Left stays in the inline style on the img. */
     #d-labubu-1{
       top: 90%;
     }
@@ -374,9 +371,9 @@
         opacity: 0.45 !important;
       }
 
-      /* labubu: keep your mobile placement */
+      /* labubu: move LEFT on mobile only (your request) */
       #d-labubu-1{
-        left: 38% !important;
+        left: 38% !important;               /* moved left from 48% */
         top: 82% !important;
         width: 320px !important;
         opacity: 0.55 !important;
@@ -433,6 +430,7 @@
 </head>
 
 <body>
+
   <main class="page">
 
     <!-- SECTION 1 HERO -->

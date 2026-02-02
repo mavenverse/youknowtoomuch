@@ -8,7 +8,7 @@
   <style>
     :root{
       --green: #C6EF19;
-      --yellow: #FFFF00; /* keeping your original yellow */
+      --yellow: #FFFF00;
       --purple: #7E23E9;
       --black: #0b0b0b;
       --white: #ffffff;
@@ -22,12 +22,14 @@
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
+
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color: var(--ink);
       background: var(--green);
     }
+
     img{ max-width:100%; display:block; }
     a{ color: inherit; }
 
@@ -39,15 +41,50 @@
 
     .section{
       padding: 56px 0;
+      position: relative;
+      overflow: hidden;
     }
 
-    /* HERO */
+    .section > .wrap{
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ---------------- DOODLE BACKGROUND SYSTEM ---------------- */
+
+    .bg-layer{
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .bg-doodle{
+      position: absolute;
+      opacity: 0.28;
+      filter: brightness(0) invert(1);
+      mix-blend-mode: screen;
+    }
+
+    .doodle-sm{ width: 180px; }
+    .doodle-md{ width: 320px; }
+    .doodle-lg{ width: 520px; }
+    .doodle-xl{ width: 760px; }
+
+    @media (max-width: 900px){
+      .bg-doodle{ opacity: 0.18; }
+      .doodle-xl{ width: 520px; }
+    }
+
+    /* ---------------- HERO ---------------- */
+
     .hero-grid{
       display:grid;
       grid-template-columns: 1.2fr 0.9fr;
       gap: 40px;
       align-items: center;
     }
+
     @media (max-width: 900px){
       .hero-grid{ grid-template-columns: 1fr; }
     }
@@ -60,6 +97,7 @@
       font-weight: 800;
       letter-spacing: -0.02em;
     }
+
     .brand-mark{
       width: 26px; height: 26px;
       border-radius: 50%;
@@ -100,19 +138,13 @@
       align-items:center;
     }
 
-    /* Hosts image: +50% and shift left */
     .hero-media{
       transform: scale(1.5) translateX(-130px) translateY(50px);
       transform-origin: center left;
     }
-    @media (max-width: 900px){
-      .hero-media{
-        transform: scale(1.15) translateX(-6%);
-        transform-origin: center;
-      }
-    }
 
-    /* PILL (keep simple + consistent) */
+    /* ---------------- PILLS ---------------- */
+
     .pill{
       display:inline-flex;
       align-items:center;
@@ -128,34 +160,31 @@
       background: rgba(0,0,0,0.10);
       color: var(--ink);
     }
-    .pill:hover{ opacity: 0.9; }
 
     .pill--white{
       background: var(--white);
       color: var(--ink);
       border-color: rgba(0,0,0,0.12);
     }
+
     .pill--accent{
       background: var(--yellow);
       color: var(--ink);
-      border-color: rgba(0,0,0,0.12);
-    }
-    .pill--purple{
-      background: var(--purple);
-      color: var(--white);
-      border-color: rgba(255,255,255,0.18);
     }
 
-    /* SECTION 2 (YELLOW + VIDEO) */
+    /* ---------------- SECTION 2 ---------------- */
+
     .bg-yellow{ background: var(--yellow); }
+
     .center{ text-align:center; }
+
     .h2{
       font-family: ui-serif, Georgia, serif;
       font-weight: 650;
-      letter-spacing: -0.02em;
       font-size: clamp(22px, 3.2vw, 34px);
       margin: 0 0 22px 0;
     }
+
     .video-shell{
       max-width: 760px;
       margin: 0 auto;
@@ -164,100 +193,87 @@
       background: rgba(255,255,255,0.22);
       border: 1px solid rgba(0,0,0,0.10);
     }
+
     .video-shell iframe{
       width:100%;
       aspect-ratio: 16/9;
       border:0;
       display:block;
     }
+
     .caption{
       font-family: ui-serif, Georgia, serif;
       font-size: 20px;
       margin-top: 18px;
     }
 
-    /* SECTION 3 (PURPLE QUOTES) */
+    /* ---------------- SECTION 3 ---------------- */
+
     .bg-purple{
       background: linear-gradient(180deg, #7E23E9 0%, #5B1BBF 100%);
       color: var(--white);
     }
+
     .quote-title{
       font-family: ui-serif, Georgia, serif;
       font-size: clamp(26px, 4vw, 44px);
       margin: 0 0 24px 0;
-      font-weight: 650;
     }
+
     .quote-grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
-      align-items: stretch;
     }
+
     @media (max-width: 900px){
       .quote-grid{ grid-template-columns: 1fr; }
     }
+
     .quote-card{
       background: rgba(198,239,25,0.92);
       color: var(--ink);
       border-radius: 18px;
-      padding: 18px 18px 16px 18px;
+      padding: 18px;
       min-height: 160px;
       display:flex;
       flex-direction: column;
       justify-content: space-between;
     }
-    .quote-text{
-      font-family: ui-serif, Georgia, serif;
-      font-size: 16px;
-      line-height: 1.35;
-      margin: 0 0 14px 0;
-    }
+
     .quote-person{
       display:flex;
-      align-items:center;
       justify-content: space-between;
-      gap: 12px;
       font-size: 12px;
       font-weight: 800;
     }
+
     .avatar{
       width: 36px; height: 36px;
       border-radius: 50%;
-      background: rgba(0,0,0,0.18);
       overflow:hidden;
-      flex: 0 0 auto;
-    }
-    .avatar img{
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
     }
 
-    /* SECTION 4 (GREEN + CTA/TYPEFORM) */
+    /* ---------------- SECTION 4 ---------------- */
+
     .dytm-grid{
       display:grid;
       grid-template-columns: 0.8fr 1.2fr;
       gap: 28px;
       align-items: center;
     }
+
     @media (max-width: 900px){
       .dytm-grid{ grid-template-columns: 1fr; }
     }
+
     .big-word{
       font-weight: 950;
-      letter-spacing: -0.05em;
       font-size: clamp(34px, 5vw, 56px);
       margin: 0 0 12px 0;
       text-transform: uppercase;
     }
-    .small{
-      margin:0;
-      max-width: 60ch;
-      line-height: 1.45;
-      font-size: 14px;
-    }
 
-    /* Typeform container: keep it clean and integrated */
     .typeform-shell{
       margin-top: 18px;
       border-radius: 18px;
@@ -267,87 +283,47 @@
       padding: 12px;
     }
 
-    /* Proper black footer */
+    /* ---------------- FOOTER ---------------- */
+
     footer{
       background: var(--black);
       color: var(--white);
       border-top: 1px solid var(--hairline-dark);
       padding: 64px 0;
     }
+
     .footer-inner{
       display:flex;
       justify-content: space-between;
-      align-items: flex-start;
       gap: 40px;
       flex-wrap: wrap;
     }
-    .footer-brand{
-      display:flex;
-      align-items:center;
-      gap: 10px;
-      font-weight: 900;
-      letter-spacing: -0.02em;
-    }
-    .footer-mark{
-      width: 26px; height: 26px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.12);
-      display:grid;
-      place-items:center;
-      font-weight: 950;
-    }
-    .footer-tagline{
-      margin: 12px 0 0 0;
-      max-width: 52ch;
-      opacity: 0.78;
-      line-height: 1.45;
-      font-size: 14px;
-    }
-    .footer-links{
-      display:flex;
-      flex-direction:column;
-      gap: 10px;
-      min-width: 160px;
-    }
+
     .footer-links a{
+      display:block;
+      margin-bottom: 10px;
       color: rgba(255,255,255,0.78);
       text-decoration:none;
       font-weight: 700;
-      font-size: 14px;
     }
+
     .footer-links a:hover{ color: var(--yellow); }
 
-    .footer-cta{
-      display:flex;
-      flex-direction: column;
-      gap: 12px;
-      min-width: 220px;
-      align-items: flex-start;
-    }
-    .footer-note{
-      font-size: 12px;
-      opacity: 0.65;
-      line-height: 1.35;
-      margin: 0;
-    }
-    .footer-bottom{
-      margin-top: 28px;
-      padding-top: 18px;
-      border-top: 1px solid var(--hairline-dark);
-      display:flex;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-      font-size: 12px;
-      opacity: 0.7;
-    }
   </style>
 </head>
 
 <body>
 
-  <!-- SECTION 1 (GREEN HERO) -->
+  <!-- SECTION 1 HERO -->
   <section class="section" style="background: var(--green);" id="top">
+
+    <div class="bg-layer">
+      <img class="bg-doodle doodle-xl" src="assets/squiggle.png" style="top:-40px; left:-180px;">
+      <img class="bg-doodle doodle-lg" src="assets/brain.png" style="top:40px; left:55%;">
+      <img class="bg-doodle doodle-md" src="assets/labubu.png" style="bottom:40px; left:40px;">
+      <img class="bg-doodle doodle-md" src="assets/rock.png" style="top:120px; right:-60px;">
+    </div>
+
     <div class="wrap">
       <div class="hero-grid">
 
@@ -364,8 +340,7 @@
           </p>
 
           <div class="hosted-by">
-            hosted by<br/>
-            mavenverse co-founders<br/>
+            hosted by mavenverse co-founders<br/>
             <strong>Pamala Buzick Kim</strong> &amp; <strong>Eva McCloskey</strong>
           </div>
 
@@ -383,118 +358,120 @@
     </div>
   </section>
 
-  <!-- SECTION 2 (YELLOW: LATEST EPISODE) -->
+  <!-- SECTION 2 VIDEO -->
   <section class="section bg-yellow" id="latest">
+
+    <div class="bg-layer">
+      <img class="bg-doodle doodle-xl" src="assets/squiggle.png" style="top:-20px; right:-180px; transform:scaleX(-1);">
+      <img class="bg-doodle doodle-md" src="assets/sneakers.png" style="top:90px; left:40px;">
+      <img class="bg-doodle doodle-md" src="assets/dog.png" style="bottom:40px; right:60px;">
+    </div>
+
     <div class="wrap center">
-      <div class="h2">Everything you’ve ever wanted to know<br/>about that thing you didn’t know about.</div>
+      <div class="h2">
+        Everything you’ve ever wanted to know<br/>
+        about that thing you didn’t know about.
+      </div>
 
       <div class="video-shell">
         <iframe
           src="https://www.youtube.com/embed/dQw4w9WgXcQ"
           title="Latest episode"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen>
         </iframe>
       </div>
 
       <div class="caption">
-        Latest YKTM Episode: <span style="text-decoration: underline;">Ideas with Tom Christmann</span>
+        Latest YKTM Episode: Ideas with Tom Christmann
       </div>
     </div>
   </section>
 
-  <!-- SECTION 3 (PURPLE: QUOTES) -->
+  <!-- SECTION 3 QUOTES -->
   <section class="section bg-purple">
+
+    <div class="bg-layer">
+      <img class="bg-doodle doodle-xl" src="assets/squiggle.png" style="top:-80px; left:-200px;">
+      <img class="bg-doodle doodle-xl" src="assets/dinner.png" style="top:40px; left:50%; transform:translateX(-50%); opacity:0.18;">
+    </div>
+
     <div class="wrap">
       <div class="quote-title">“How do you even know that?”</div>
 
       <div class="quote-grid">
         <div class="quote-card">
-          <p class="quote-text">“My knowledge of the LinkedIn algorithm was gained against my will out of pure survival!”</p>
+          <p>“My knowledge of the LinkedIn algorithm was gained against my will out of pure survival!”</p>
           <div class="quote-person">
-            <span>John Smith</span>
-            <div class="avatar"><img src="assets/avatar-1.jpg" alt="" /></div>
+            <span>Cindy Gallop</span>
+            <div class="avatar"><img src="assets/avatar-1.jpg"></div>
           </div>
         </div>
 
         <div class="quote-card">
-          <p class="quote-text">“I’ve become an expert on the building across from my apartment. Is that weird?”</p>
+          <p>“I’ve become an expert on the building across from my apartment. Is that weird?”</p>
           <div class="quote-person">
-            <span>Jane Smith</span>
-            <div class="avatar"><img src="assets/avatar-2.jpg" alt="" /></div>
+            <span>Amy Banks</span>
+            <div class="avatar"><img src="assets/avatar-2.jpg"></div>
           </div>
         </div>
 
         <div class="quote-card">
-          <p class="quote-text">“I have been studying ideas for 34 years. And I think I may just be starting to get it.”</p>
+          <p>“I have been studying ideas for 34 years. And I think I may just be starting to get it.”</p>
           <div class="quote-person">
             <span>Tom Christmann</span>
-            <div class="avatar"><img src="assets/avatar-3.jpg" alt="" /></div>
+            <div class="avatar"><img src="assets/avatar-3.jpg"></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 4 (GREEN: DYKTM + TYPEFORM EMBED) -->
+  <!-- SECTION 4 TYPEFORM -->
   <section class="section" style="background: var(--green);" id="guest">
+
+    <div class="bg-layer">
+      <img class="bg-doodle doodle-lg" src="assets/whale.png" style="bottom:-60px; left:-120px;">
+      <img class="bg-doodle doodle-md" src="assets/baby.png" style="top:80px; right:60px;">
+    </div>
+
     <div class="wrap">
       <div class="dytm-grid">
-        <div>
-          <!-- Optional left column image if you want it -->
-          <!-- <img src="assets/brain.png" alt="Brain" style="max-width:320px;" /> -->
-        </div>
+
+        <div></div>
 
         <div>
           <div class="big-word">DYKTM?</div>
-          <p class="small">
-            To be a guest or for more information about the show, submit the form below.
-          </p>
+          <p>To be a guest or for more information about the show, submit the form below.</p>
 
           <div class="typeform-shell">
             <div data-tf-live="01KFBY187YHT9EQ38XPJE2DBWG"></div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- PROPER BLACK FOOTER -->
+  <!-- FOOTER -->
   <footer>
     <div class="wrap">
       <div class="footer-inner">
+
         <div>
-          <div class="footer-brand">
-            <span class="footer-mark">m</span>
-            <span>mavenverse</span>
-          </div>
-          <p class="footer-tagline">
-            A show celebrating the deeply specific, oddly delightful, occasionally unhinged things people know way too much about.
-          </p>
+          <strong>mavenverse</strong><br/>
+          <span style="opacity:0.75;">
+            A show celebrating the deeply specific, oddly delightful,
+            occasionally unhinged things people know way too much about.
+          </span>
         </div>
 
-        <nav class="footer-links" aria-label="Footer">
+        <div class="footer-links">
           <a href="#top">Top</a>
           <a href="#latest">Latest episode</a>
           <a href="#guest">Be a guest</a>
-        </nav>
-
-        <div class="footer-cta">
-          <a class="pill pill--accent"
-             href="https://mavenverse.typeform.com/inquiry"
-             target="_blank"
-             rel="noopener noreferrer">
-            mavenverse inquiry
-          </a>
-          <p class="footer-note">
-            We use a form instead of posting an email to reduce spam.
-          </p>
+          <a href="https://mavenverse.typeform.com/inquiry" target="_blank">Contact</a>
         </div>
-      </div>
 
-      <div class="footer-bottom">
-        <div>© 2026 mavenverse</div>
-        <div>YKTM</div>
       </div>
     </div>
   </footer>

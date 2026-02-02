@@ -97,26 +97,29 @@
       top: 88%;
     }
 
-    @media (max-width: 700px){
+@media (max-width: 700px){
 
-      /* allow hero overflow so hosts/labubu don’t get clipped */
-      .section#top{
-        overflow: visible;
-      }
+  /* HERO SECTION: tighten spacing */
+  #top{
+    padding-bottom: 20px;
+  }
 
-      /* center the right-side grid item on mobile */
-      .hero-grid > div:last-child{
-        display: flex;
-        justify-content: center;
-      }
+  /* Center the image container */
+  .hero-grid > div:last-child{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+  }
 
-      /* hosts photo: stop cropping + center */
-      .hero-media{
-        transform: none !important;
-        width: 100%;
-        max-width: 420px;
-        margin: 24px auto 0 auto;
-      }
+  /* Hosts photo: bigger + centered */
+  .hero-media{
+    transform: none !important;
+    width: 115%;              /* make it bigger */
+    max-width: none !important;
+    margin: 10px auto 0 auto; /* pull upward */
+  }
+}
 
       /* global mobile behavior */
       .bg-doodle{

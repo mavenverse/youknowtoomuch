@@ -95,10 +95,18 @@
 
 @media (max-width: 700px){
 
+  /* hosts photo: stop cropping */
+  .hero-media{
+    transform: none !important;
+    width: 100%;
+    max-width: 420px;
+    margin: 24px auto 0 auto;
+  }
+
   /* global mobile behavior */
   .bg-doodle{
     opacity: 0.35;
-    transform: none;          /* reset weird inherited transforms */
+    transform: none !important;
   }
 
   /* keep squiggles, but tuck them in */
@@ -114,16 +122,16 @@
     opacity: 0.45 !important;
   }
 
-  /* labubu: lock under buttons, centered */
+  /* labubu: keep where you like on mobile */
   #d-labubu-1{
     left: 55% !important;
     top: 82% !important;
-    width: 320px !important;         /* override sz class */
+    width: 320px !important;
     opacity: 0.55 !important;
     transform: translate(-50%,-50%) !important;
   }
 
-  /* section 2 doodles: keep away from video */
+  /* section 2 doodles */
   #d-sneakers{
     left: -10px !important;
     top: 120px !important;
@@ -138,7 +146,7 @@
     opacity: 0.45 !important;
   }
 
-  /* dinner: smaller, still off the right edge */
+  /* dinner */
   #d-dinner{
     right: -120px !important;
     top: 18% !important;
@@ -146,7 +154,7 @@
     opacity: 0.35 !important;
   }
 
-  /* whale: place it fully inside, not cut */
+  /* whale */
   #d-whale{
     left: -60px !important;
     bottom: -20% !important;
@@ -154,7 +162,7 @@
     opacity: 0.35 !important;
   }
 
-  /* second brain + dog: reduce chaos */
+  /* section 4 brain + dog */
   #d-brain-2{
     left: -30px !important;
     top: 6% !important;
@@ -409,8 +417,8 @@
   <img id="d-brain-1" class="bg-doodle doodle-lg" src="assets/brain.png"
        style="top:40px; left:55%; width:520px; opacity:0.70;">
 
-  <img id="d-labubu-1" class="bg-doodle sz-4 on-top" src="assets/labubu.png"
-       style="left:48%; top:80%; transform:translate(-50%,-50%); opacity:0.95;">
+<img id="d-labubu-1" class="bg-doodle sz-4 on-top" src="assets/labubu.png"
+     style="left:48%; transform:translate(-50%,-50%); opacity:0.95;">
 </div>
 
       <div class="wrap">

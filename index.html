@@ -23,19 +23,30 @@
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
 
+    /* keep body neutral; gradient lives on .page */
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color: var(--ink);
+      background: var(--green);
+    }
 
-      /* One continuous page gradient */
+    /* The gradient canvas (this is the key) */
+    .page{
+      /* Make this taller if the gradient still "ends" too soon */
+      min-height: 260vh;
+
       background: linear-gradient(
         180deg,
         #C6EF19 0%,
-        #C6EF19 26%,
-        #EF7B45 52%,
-        #D84727 78%,
-        #D84727 100%
+        #C6EF19 12%,
+
+        #EF7B45 32%,
+        #D84727 62%,
+
+        #EF7B45 84%,
+        #C6EF19 96%,
+        #C6EF19 100%
       );
     }
 
@@ -52,7 +63,6 @@
       padding: 56px 0;
       position: relative;
       overflow: hidden;
-      /* IMPORTANT: let the body gradient show through */
       background: transparent;
     }
 
@@ -96,6 +106,7 @@
       .sz-1{ width: 220px; }
       .doodle-xl{ width: 520px; }
       .doodle-lg{ width: 420px; }
+      .page{ min-height: 320vh; } /* mobile needs more height */
     }
 
     /* ---------------- HERO ---------------- */
@@ -293,7 +304,7 @@
       padding: 12px;
     }
 
-    /* ---------------- FOOTER (solid, not gradient) ---------------- */
+    /* ---------------- FOOTER (solid) ---------------- */
 
     footer{
       position: relative;
@@ -327,178 +338,153 @@
 
 <body>
 
-  <!-- SECTION 1 HERO -->
-  <section class="section" id="top">
-
-    <div class="bg-layer">
-      <!-- KEEP squiggle where it was -->
-      <img class="bg-doodle doodle-xl" src="assets/squiggle.png"
-           style="top:-40px; left:-180px; opacity:0.55;">
-
-      <!-- brain placement (restored) -->
-      <img class="bg-doodle doodle-lg" src="assets/brain.png"
-           style="top:40px; left:55%; width:520px; opacity:0.70;">
-    </div>
-
-    <div class="wrap">
-      <div class="hero-grid">
-
-        <div>
-          <div class="brand-row">
-            <div class="brand-mark">m</div>
-            <div>mavenverse</div>
-          </div>
-
-          <h1 class="hero-title">YOU KNOW<br/>TOO MUCH</h1>
-
-          <p class="hero-desc">
-            A show celebrating the deeply specific, oddly delightful, occasionally unhinged things people know way too much about.
-          </p>
-
-          <div class="hosted-by">
-            hosted by mavenverse co-founders<br/>
-            <strong>Pamala Buzick Kim</strong> &amp; <strong>Eva McCloskey</strong>
-          </div>
-
-          <div class="row">
-            <a class="pill pill--white" href="#latest">Latest episode</a>
-            <a class="pill pill--white" href="#guest">Be a guest</a>
-          </div>
-        </div>
-
-        <div>
-          <img class="hero-media" src="assets/hosts.png" alt="Hosts" />
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTION 2 VIDEO -->
-  <section class="section" id="latest">
-
-    <div class="bg-layer">
-
-      <!-- LABUBU is BACK: render in section 2 and pull up into the green/tangerine seam -->
-      <img class="bg-doodle sz-4" src="assets/labubu.png"
-           style="left:6%; top:-240px; opacity:0.90;">
-
-      <!-- KEEP squiggle where it was -->
-      <img class="bg-doodle doodle-xl" src="assets/squiggle.png"
-           style="top:-20px; right:-180px; transform:scaleX(-1); opacity:0.45;">
-
-      <!-- baby: right side -->
-      <img class="bg-doodle sz-3" src="assets/baby.png"
-           style="right:6%; top:58%; opacity:0.90;">
-
-      <!-- sneakers: bottom-left -->
-      <img class="bg-doodle sz-2" src="assets/sneakers.png"
-           style="left:4%; bottom:6%; opacity:0.85;">
-    </div>
-
-    <div class="wrap center">
-      <div class="h2">
-        Everything you’ve ever wanted to know<br/>
-        about that thing you didn’t know about.
+  <main class="page">
+    <!-- SECTION 1 HERO -->
+    <section class="section" id="top">
+      <div class="bg-layer">
+        <img class="bg-doodle doodle-xl" src="assets/squiggle.png"
+             style="top:-40px; left:-180px; opacity:0.55;">
+        <img class="bg-doodle doodle-lg" src="assets/brain.png"
+             style="top:40px; left:55%; width:520px; opacity:0.70;">
       </div>
 
-      <div class="video-shell">
-        <iframe
-          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-          title="Latest episode"
-          allowfullscreen>
-        </iframe>
-      </div>
+      <div class="wrap">
+        <div class="hero-grid">
+          <div>
+            <div class="brand-row">
+              <div class="brand-mark">m</div>
+              <div>mavenverse</div>
+            </div>
 
-      <div class="caption">
-        Latest YKTM Episode: Ideas with Tom Christmann
-      </div>
-    </div>
-  </section>
+            <h1 class="hero-title">YOU KNOW<br/>TOO MUCH</h1>
 
-  <!-- SECTION 3 QUOTES -->
-  <section class="section">
+            <p class="hero-desc">
+              A show celebrating the deeply specific, oddly delightful, occasionally unhinged things people know way too much about.
+            </p>
 
-    <div class="bg-layer">
-      <!-- KEEP squiggle where it was -->
-      <img class="bg-doodle doodle-xl" src="assets/squiggle.png"
-           style="top:-80px; left:-200px; opacity:0.40;">
+            <div class="hosted-by">
+              hosted by mavenverse co-founders<br/>
+              <strong>Pamala Buzick Kim</strong> &amp; <strong>Eva McCloskey</strong>
+            </div>
 
-      <!-- dinner: falling off page to the right -->
-      <img class="bg-doodle sz-4" src="assets/dinner.png"
-           style="right:-2%; top:14%; opacity:0.75;">
-    </div>
-
-    <div class="wrap">
-      <div class="quote-title">“How do you even know that?”</div>
-
-      <div class="quote-grid">
-        <div class="quote-card">
-          <p>“My knowledge of the LinkedIn algorithm was gained against my will out of pure survival!”</p>
-          <div class="quote-person">
-            <span>Cindy Gallop</span>
-            <div class="avatar"><img src="assets/avatar-1.jpg" alt=""></div>
+            <div class="row">
+              <a class="pill pill--white" href="#latest">Latest episode</a>
+              <a class="pill pill--white" href="#guest">Be a guest</a>
+            </div>
           </div>
-        </div>
 
-        <div class="quote-card">
-          <p>“I’ve become an expert on the building across from my apartment. Is that weird?”</p>
-          <div class="quote-person">
-            <span>Amy Banks</span>
-            <div class="avatar"><img src="assets/avatar-2.jpg" alt=""></div>
-          </div>
-        </div>
-
-        <div class="quote-card">
-          <p>“I have been studying ideas for 34 years. And I think I may just be starting to get it.”</p>
-          <div class="quote-person">
-            <span>Tom Christmann</span>
-            <div class="avatar"><img src="assets/avatar-3.jpg" alt=""></div>
+          <div>
+            <img class="hero-media" src="assets/hosts.png" alt="Hosts" />
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- SECTION 4 TYPEFORM -->
-  <section class="section" id="guest">
+    <!-- SECTION 2 VIDEO -->
+    <section class="section" id="latest">
+      <div class="bg-layer">
+        <img class="bg-doodle sz-4" src="assets/labubu.png"
+             style="left:6%; top:-240px; opacity:0.90;">
+        <img class="bg-doodle doodle-xl" src="assets/squiggle.png"
+             style="top:-20px; right:-180px; transform:scaleX(-1); opacity:0.45;">
+        <img class="bg-doodle sz-3" src="assets/baby.png"
+             style="right:6%; top:58%; opacity:0.90;">
+        <img class="bg-doodle sz-2" src="assets/sneakers.png"
+             style="left:4%; bottom:6%; opacity:0.85;">
+      </div>
 
-    <div class="bg-layer">
-      <!-- whale: bottom-left inside section 4 -->
-      <img class="bg-doodle sz-4" src="assets/whale.png"
-           style="left:2%; bottom:-20%; opacity:0.90;">
-
-      <!-- brain: left side of DYKTM title -->
-      <img class="bg-doodle sz-3" src="assets/brain.png"
-           style="left:10%; top:18%; opacity:0.85;">
-
-      <!-- dog -->
-      <img class="bg-doodle sz-3" src="assets/dog.png"
-           style="right:-6%; top:40%; opacity:0.85;">
-    </div>
-
-    <div class="wrap">
-      <div class="dytm-grid">
-        <div></div>
-
-        <div>
-          <div class="big-word">DYKTM?</div>
-          <p>To be a guest or for more information about the show, submit the form below.</p>
-
-          <div class="typeform-shell">
-            <div data-tf-live="01KFBY187YHT9EQ38XPJE2DBWG"></div>
-          </div>
+      <div class="wrap center">
+        <div class="h2">
+          Everything you’ve ever wanted to know<br/>
+          about that thing you didn’t know about.
         </div>
 
+        <div class="video-shell">
+          <iframe
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            title="Latest episode"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <div class="caption">
+          Latest YKTM Episode: Ideas with Tom Christmann
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- SECTION 3 QUOTES -->
+    <section class="section">
+      <div class="bg-layer">
+        <img class="bg-doodle doodle-xl" src="assets/squiggle.png"
+             style="top:-80px; left:-200px; opacity:0.40;">
+        <img class="bg-doodle sz-4" src="assets/dinner.png"
+             style="right:-2%; top:14%; opacity:0.75;">
+      </div>
+
+      <div class="wrap">
+        <div class="quote-title">“How do you even know that?”</div>
+
+        <div class="quote-grid">
+          <div class="quote-card">
+            <p>“My knowledge of the LinkedIn algorithm was gained against my will out of pure survival!”</p>
+            <div class="quote-person">
+              <span>Cindy Gallop</span>
+              <div class="avatar"><img src="assets/avatar-1.jpg" alt=""></div>
+            </div>
+          </div>
+
+          <div class="quote-card">
+            <p>“I’ve become an expert on the building across from my apartment. Is that weird?”</p>
+            <div class="quote-person">
+              <span>Amy Banks</span>
+              <div class="avatar"><img src="assets/avatar-2.jpg" alt=""></div>
+            </div>
+          </div>
+
+          <div class="quote-card">
+            <p>“I have been studying ideas for 34 years. And I think I may just be starting to get it.”</p>
+            <div class="quote-person">
+              <span>Tom Christmann</span>
+              <div class="avatar"><img src="assets/avatar-3.jpg" alt=""></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4 TYPEFORM -->
+    <section class="section" id="guest">
+      <div class="bg-layer">
+        <img class="bg-doodle sz-4" src="assets/whale.png"
+             style="left:2%; bottom:-20%; opacity:0.90;">
+        <img class="bg-doodle sz-3" src="assets/brain.png"
+             style="left:10%; top:18%; opacity:0.85;">
+        <img class="bg-doodle sz-3" src="assets/dog.png"
+             style="right:-6%; top:40%; opacity:0.85;">
+      </div>
+
+      <div class="wrap">
+        <div class="dytm-grid">
+          <div></div>
+
+          <div>
+            <div class="big-word">DYKTM?</div>
+            <p>To be a guest or for more information about the show, submit the form below.</p>
+
+            <div class="typeform-shell">
+              <div data-tf-live="01KFBY187YHT9EQ38XPJE2DBWG"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <!-- FOOTER (solid #1F271B) -->
   <footer>
     <div class="wrap">
       <div class="footer-inner">
-
         <div>
           <strong>mavenverse</strong><br/>
           <span style="opacity:0.75;">
@@ -513,7 +499,6 @@
           <a href="#guest">Be a guest</a>
           <a href="https://mavenverse.typeform.com/inquiry" target="_blank" rel="noopener noreferrer">Contact</a>
         </div>
-
       </div>
     </div>
   </footer>

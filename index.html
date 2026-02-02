@@ -115,14 +115,19 @@
       .hero-grid{ grid-template-columns: 1fr; }
     }
 
-    .brand-row{
-      display:flex;
-      align-items:center;
-      gap: 10px;
-      margin-bottom: 16px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
+.brand-row{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  margin-bottom: 16px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+
+  /* add this */
+  text-decoration: none;
+  color: inherit;
+}
+    
     .brand-mark{
       width: 26px; height: 26px;
       border-radius: 50%;
@@ -450,10 +455,10 @@
       <div class="wrap">
         <div class="hero-grid">
           <div>
-            <div class="brand-row">
-              <div class="brand-mark">m</div>
-              <div>mavenverse</div>
-            </div>
+        <a class="brand-row" href="https://mavenverse.com" target="_blank" rel="noopener noreferrer">
+  <div class="brand-mark">m</div>
+  <div>mavenverse</div>
+</a>
 
             <h1 class="hero-title">YOU KNOW<br/>TOO MUCH</h1>
 
@@ -589,7 +594,10 @@
     <div class="wrap">
       <div class="footer-inner">
         <div>
-          <strong>About mavenverse</strong><br/>
+        <a href="https://mavenverse.com" target="_blank" rel="noopener noreferrer"
+   style="color:inherit; text-decoration:none; font-weight:800;">
+  mavenverse
+</a><br/>
           <span style="opacity:0.75;"> Brands don't need influencers. They need communities. mavenverse connects them to trusted, high-performing groups that don't accept outside influence lightly, from book clubs to mom groups to niche hobbyists. We vet community leaders, protect their trust, and only bring in brands that belong. It's earned proximity at scale, not media buying.
           </span>
         </div>

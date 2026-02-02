@@ -196,16 +196,28 @@
       border-color: rgba(0,0,0,0.12);
     }
 
-    /* ---------------- SECTION 2 ---------------- */
+ /* ---------------- SECTION 2 ---------------- */
 
-    .center{ text-align:center; }
+.center{ text-align:center; }
 
-    .h2{
-      font-family: ui-serif, Georgia, serif;
-      font-weight: 650;
-      font-size: clamp(22px, 3.2vw, 34px);
-      margin: 0 0 22px 0;
-    }
+.h2{
+  font-family: ui-serif, Georgia, serif;
+  font-weight: 650;
+  font-size: clamp(22px, 3.2vw, 34px);
+  margin: 0 0 22px 0;
+}
+
+/* keep line break on desktop */
+.br-desktop{
+  display: inline;
+}
+
+/* remove forced break on mobile */
+@media (max-width: 700px){
+  .br-desktop{
+    display: none;
+  }
+}
 
     .video-shell{
       max-width: 760px;
@@ -467,7 +479,7 @@
             </p>
 
             <div class="hosted-by">
-              hosted by mavenverse co-founders<br/>
+              Hosted by mavenverse co-founders<br/>
               <strong>Pamala Buzick Kim</strong> &amp; <strong>Eva McCloskey</strong>
             </div>
 
@@ -497,11 +509,12 @@
              style="left:4%; top:190px; opacity:0.90;">
       </div>
 
-      <div class="wrap center">
-        <div class="h2">
-          Everything you’ve ever wanted to know<br/>
-          about that thing you didn’t know about.
-        </div>
+<div class="wrap center">
+  <div class="h2">
+    Everything you’ve ever wanted to know
+    <br class="br-desktop" />
+    about that thing you didn’t know about.
+  </div>
 
         <div class="video-shell">
           <iframe

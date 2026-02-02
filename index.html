@@ -64,6 +64,7 @@
       opacity: 0.45;
       filter: brightness(0) invert(1) contrast(1.25);
       mix-blend-mode: normal;
+      max-width: none; /* IMPORTANT: allow big doodles */
     }
 
     .doodle-sm{ width: 180px; }
@@ -72,10 +73,10 @@
     .doodle-xl{ width: 760px; }
 
     @media (max-width: 900px){
-  .bg-doodle{ opacity: 0.35; }
-  .doodle-xl{ width: 520px; }
-  .doodle-lg{ width: 420px; }
-  .doodle-md{ width: 300px; }
+      .bg-doodle{ opacity: 0.35; }
+      .doodle-xl{ width: 520px; }
+      .doodle-lg{ width: 420px; }
+      .doodle-md{ width: 300px; }
     }
 
     /* ---------------- HERO ---------------- */
@@ -310,7 +311,6 @@
     }
 
     .footer-links a:hover{ color: var(--yellow); }
-
   </style>
 </head>
 
@@ -320,10 +320,10 @@
   <section class="section" style="background: var(--green);" id="top">
 
     <div class="bg-layer">
-      <img class="bg-doodle doodle-xl" src="assets/squiggle.png" style="top:-40px; left:-180px; opacity:0.65">
-      <img class="bg-doodle doodle-lg" src="assets/brain.png" style="top:40px; left:55%; opacity:0.65;">
-      <img class="bg-doodle doodle-md" src="assets/labubu.png" style="bottom:40px; left:40px; opacity:0.65">
-      <img class="bg-doodle doodle-md" src="assets/rock.png" style="top:120px; right:-60px; opacity:0.65">
+      <img class="bg-doodle doodle-xl" src="assets/squiggle.png" style="top:-40px; left:-180px; opacity:0.55;">
+      <img class="bg-doodle doodle-lg" src="assets/brain.png" style="top:40px; left:55%; width:520px; opacity:0.70;">
+      <!-- Labubu: between green/yellow fold near buttons -->
+      <img class="bg-doodle" src="assets/labubu.png" style="left:44%; bottom:-140px; width:520px; opacity:0.85;">
     </div>
 
     <div class="wrap">
@@ -364,9 +364,11 @@
   <section class="section bg-yellow" id="latest">
 
     <div class="bg-layer">
-      <img class="bg-doodle doodle-xl" src="assets/squiggle.png" style="top:-20px; right:-180px; transform:scaleX(-1); opacity:0.65">
-      <img class="bg-doodle doodle-md" src="assets/sneakers.png" style="top:90px; left:40px; opacity:0.65">
-      <img class="bg-doodle doodle-md" src="assets/dog.png" style="bottom:40px; right:60px; opacity:0.65">
+      <img class="bg-doodle doodle-xl" src="assets/squiggle.png" style="top:-20px; right:-180px; transform:scaleX(-1); opacity:0.45;">
+      <!-- Rock: 3x bigger, right of YouTube -->
+      <img class="bg-doodle" src="assets/rock.png" style="right:-160px; top:120px; width:980px; opacity:0.95;">
+      <!-- Baby: left of YouTube, slightly lower than rock -->
+      <img class="bg-doodle" src="assets/baby.png" style="left:-120px; top:190px; width:720px; opacity:0.95;">
     </div>
 
     <div class="wrap center">
@@ -393,8 +395,9 @@
   <section class="section bg-purple">
 
     <div class="bg-layer">
-      <img class="bg-doodle doodle-xl" src="assets/squiggle.png" style="top:-80px; left:-200px; opacity:0.65">
-      <img class="bg-doodle doodle-xl" src="assets/dinner.png" style="top:40px; left:50%; transform:translateX(-50%); opacity:0.65;">
+      <img class="bg-doodle doodle-xl" src="assets/squiggle.png" style="top:-80px; left:-200px; opacity:0.40;">
+      <!-- Dinner: fall off page to right of quote boxes -->
+      <img class="bg-doodle" src="assets/dinner.png" style="right:-260px; top:140px; width:1100px; opacity:0.60;">
     </div>
 
     <div class="wrap">
@@ -405,7 +408,7 @@
           <p>“My knowledge of the LinkedIn algorithm was gained against my will out of pure survival!”</p>
           <div class="quote-person">
             <span>Cindy Gallop</span>
-            <div class="avatar"><img src="assets/avatar-1.jpg"></div>
+            <div class="avatar"><img src="assets/avatar-1.jpg" alt=""></div>
           </div>
         </div>
 
@@ -413,7 +416,7 @@
           <p>“I’ve become an expert on the building across from my apartment. Is that weird?”</p>
           <div class="quote-person">
             <span>Amy Banks</span>
-            <div class="avatar"><img src="assets/avatar-2.jpg"></div>
+            <div class="avatar"><img src="assets/avatar-2.jpg" alt=""></div>
           </div>
         </div>
 
@@ -421,7 +424,7 @@
           <p>“I have been studying ideas for 34 years. And I think I may just be starting to get it.”</p>
           <div class="quote-person">
             <span>Tom Christmann</span>
-            <div class="avatar"><img src="assets/avatar-3.jpg"></div>
+            <div class="avatar"><img src="assets/avatar-3.jpg" alt=""></div>
           </div>
         </div>
       </div>
@@ -432,13 +435,16 @@
   <section class="section" style="background: var(--green);" id="guest">
 
     <div class="bg-layer">
-      <img class="bg-doodle doodle-lg" src="assets/whale.png" style="bottom:-60px; left:-120px; opacity:0.65">
-      <img class="bg-doodle doodle-md" src="assets/baby.png" style="top:80px; right:60px; opacity:0.65">
+      <!-- Whale: placement good, 2x bigger -->
+      <img class="bg-doodle" src="assets/whale.png" style="bottom:-120px; left:-220px; width:1040px; opacity:0.80;">
+      <!-- Brain: left side of DYKTM title -->
+      <img class="bg-doodle" src="assets/brain.png" style="top:40px; left:-120px; width:560px; opacity:0.70;">
+      <!-- Dog: split evenly between green->black fold (centered on bottom edge) -->
+      <img class="bg-doodle" src="assets/dog.png" style="left:50%; bottom:-120px; transform:translateX(-50%); width:720px; opacity:0.75;">
     </div>
 
     <div class="wrap">
       <div class="dytm-grid">
-
         <div></div>
 
         <div>
@@ -471,7 +477,7 @@
           <a href="#top">Top</a>
           <a href="#latest">Latest episode</a>
           <a href="#guest">Be a guest</a>
-          <a href="https://mavenverse.typeform.com/inquiry" target="_blank">Contact</a>
+          <a href="https://mavenverse.typeform.com/inquiry" target="_blank" rel="noopener noreferrer">Contact</a>
         </div>
 
       </div>

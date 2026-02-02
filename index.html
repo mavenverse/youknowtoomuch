@@ -92,17 +92,83 @@
     .doodle-xl{ width: 760px; }
     .doodle-lg{ width: 520px; }
 
-    @media (max-width: 900px){
-      .bg-doodle{ opacity: 0.55; }
-      .sz-4{ width: 420px; }
-      .sz-3{ width: 340px; }
-      .sz-2{ width: 260px; }
-      .sz-1{ width: 220px; }
-      .doodle-xl{ width: 520px; }
-      .doodle-lg{ width: 420px; }
-      .page{ min-height: 320vh; }
-    }
 
+@media (max-width: 700px){
+
+  /* global mobile behavior */
+  .bg-doodle{
+    opacity: 0.35;
+    transform: none;          /* reset weird inherited transforms */
+  }
+
+  /* keep squiggles, but tuck them in */
+  #d-squiggle-1{ top:-40px !important; left:-260px !important; width:520px !important; }
+  #d-squiggle-2{ top:-60px !important; right:-260px !important; width:520px !important; }
+  #d-squiggle-3{ top:-60px !important; left:-260px !important; width:520px !important; }
+
+  /* hero brain: smaller + pushed up */
+  #d-brain-1{
+    top: 10px !important;
+    left: 48% !important;
+    width: 380px !important;
+    opacity: 0.45 !important;
+  }
+
+  /* labubu: lock under buttons, centered */
+  #d-labubu-1{
+    left: 55% !important;
+    top: 78% !important;
+    width: 320px !important;         /* override sz class */
+    opacity: 0.55 !important;
+    transform: translate(-50%,-50%) !important;
+  }
+
+  /* section 2 doodles: keep away from video */
+  #d-sneakers{
+    left: -10px !important;
+    top: 120px !important;
+    width: 220px !important;
+    opacity: 0.45 !important;
+  }
+
+  #d-baby{
+    right: -40px !important;
+    top: 62% !important;
+    width: 240px !important;
+    opacity: 0.45 !important;
+  }
+
+  /* dinner: smaller, still off the right edge */
+  #d-dinner{
+    right: -120px !important;
+    top: 18% !important;
+    width: 360px !important;
+    opacity: 0.35 !important;
+  }
+
+  /* whale: place it fully inside, not cut */
+  #d-whale{
+    left: -60px !important;
+    bottom: -20% !important;
+    width: 420px !important;
+    opacity: 0.35 !important;
+  }
+
+  /* second brain + dog: reduce chaos */
+  #d-brain-2{
+    left: -30px !important;
+    top: 6% !important;
+    width: 260px !important;
+    opacity: 0.35 !important;
+  }
+
+  #d-dog{
+    right: -80px !important;
+    top: 52% !important;
+    width: 280px !important;
+    opacity: 0.35 !important;
+  }
+}
     /* ---------------- HERO ---------------- */
 
     .hero-grid{
@@ -336,21 +402,15 @@
 
     <!-- SECTION 1 HERO -->
     <section class="section" id="top">
-      <div class="bg-layer">
-  <img class="bg-doodle doodle-xl" src="assets/squiggle.png"
+     <div class="bg-layer">
+  <img id="d-squiggle-1" class="bg-doodle doodle-xl" src="assets/squiggle.png"
        style="top:-40px; left:-180px; opacity:0.55;">
 
-  <img class="bg-doodle doodle-lg" src="assets/brain.png"
+  <img id="d-brain-1" class="bg-doodle doodle-lg" src="assets/brain.png"
        style="top:40px; left:55%; width:520px; opacity:0.70;">
 
-  <!-- LABUBU: between buttons + hosts -->
-  <img class="bg-doodle sz-4 on-top" src="assets/labubu.png"
-       style="
-         left: 48%;
-         top: 86%;
-         transform: translate(-50%, -50%);
-         opacity: 0.95;
-       ">
+  <img id="d-labubu-1" class="bg-doodle sz-4 on-top" src="assets/labubu.png"
+       style="left:48%; top:72%; transform:translate(-50%,-50%); opacity:0.95;">
 </div>
 
       <div class="wrap">
@@ -389,15 +449,14 @@
     <section class="section" id="latest">
       <div class="bg-layer">
 
-        <img class="bg-doodle doodle-xl" src="assets/squiggle.png"
-             style="top:-20px; right:-180px; transform:scaleX(-1); opacity:0.45;">
+      <img id="d-squiggle-2" class="bg-doodle doodle-xl" src="assets/squiggle.png"
+     style="top:-20px; right:-180px; transform:scaleX(-1); opacity:0.45;">
 
-        <img class="bg-doodle sz-3" src="assets/baby.png"
-             style="right:6%; top:58%; opacity:0.90;">
+<img id="d-baby" class="bg-doodle sz-3" src="assets/baby.png"
+     style="right:6%; top:58%; opacity:0.90;">
 
-        <!-- SNEAKERS: move up near the top of the video window -->
-        <img class="bg-doodle sz-2" src="assets/sneakers.png"
-             style="left:4%; top:390px; opacity:0.90;">
+<img id="d-sneakers" class="bg-doodle sz-2" src="assets/sneakers.png"
+     style="left:4%; top:190px; opacity:0.90;">
       </div>
 
       <div class="wrap center">
@@ -423,10 +482,11 @@
     <!-- SECTION 3 QUOTES -->
     <section class="section">
       <div class="bg-layer">
-        <img class="bg-doodle doodle-xl" src="assets/squiggle.png"
-             style="top:-80px; left:-200px; opacity:0.40;">
-        <img class="bg-doodle sz-4" src="assets/dinner.png"
-             style="right:-2%; top:14%; opacity:0.75;">
+     <img id="d-squiggle-3" class="bg-doodle doodle-xl" src="assets/squiggle.png"
+     style="top:-80px; left:-200px; opacity:0.40;">
+
+<img id="d-dinner" class="bg-doodle sz-4" src="assets/dinner.png"
+     style="right:-2%; top:14%; opacity:0.75;">
       </div>
 
       <div class="wrap">
@@ -464,11 +524,14 @@
     <section class="section" id="guest">
       <div class="bg-layer">
 
-        <img class="bg-doodle sz-3" src="assets/brain.png"
-             style="left:10%; top:18%; opacity:0.85;">
+       <img id="d-whale" class="bg-doodle sz-4" src="assets/whale.png"
+     style="left:2%; bottom:-55%; opacity:0.90;">
 
-        <img class="bg-doodle sz-3" src="assets/dog.png"
-             style="right:-6%; top:40%; opacity:0.85;">
+<img id="d-brain-2" class="bg-doodle sz-3" src="assets/brain.png"
+     style="left:10%; top:18%; opacity:0.85;">
+
+<img id="d-dog" class="bg-doodle sz-3" src="assets/dog.png"
+     style="right:-6%; top:40%; opacity:0.85;">
       </div>
 
       <div class="wrap">
@@ -500,9 +563,6 @@
             occasionally unhinged things people know way too much about.
           </span>
         </div>
-        
-        <img class="bg-doodle sz-4" src="assets/whale.png"
-             style="left:2%; bottom:-110%; opacity:0.90;">
 
         <div class="footer-links">
           <a href="#top">Top</a>

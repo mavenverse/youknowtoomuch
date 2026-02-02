@@ -8,10 +8,10 @@
   <style>
     :root{
       --green: #C6EF19;
-      --tangerine: #ef7b45;
+      --tangerine: #EF7B45;
       --burnttang: #D84727;
-      --black: #1f271B;
-      --white: #f2f4f3;
+      --black: #1F271B;
+      --white: #F2F4F3;
       --ink: #111111;
       --hairline-dark: rgba(255,255,255,0.10);
 
@@ -27,7 +27,16 @@
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color: var(--ink);
-      background: var(--green);
+
+      /* One continuous page gradient */
+      background: linear-gradient(
+        180deg,
+        #C6EF19 0%,
+        #C6EF19 26%,
+        #EF7B45 52%,
+        #D84727 78%,
+        #D84727 100%
+      );
     }
 
     img{ max-width:100%; display:block; }
@@ -43,6 +52,8 @@
       padding: 56px 0;
       position: relative;
       overflow: hidden;
+      /* IMPORTANT: let the body gradient show through */
+      background: transparent;
     }
 
     .section > .wrap{
@@ -67,15 +78,15 @@
       max-width: none;
     }
 
-    /* size tokens (tune here if needed) */
+    /* size tokens */
     .sz-1{ width: 280px; }
     .sz-2{ width: 360px; }
     .sz-3{ width: 460px; }
     .sz-4{ width: 620px; }
 
-    /* original doodle helper sizes (kept for squiggles) */
+    /* squiggles */
     .doodle-xl{ width: 760px; }
-    .doodle-lg{ width: 520px; } /* you referenced this class */
+    .doodle-lg{ width: 520px; }
 
     @media (max-width: 900px){
       .bg-doodle{ opacity: 0.55; }
@@ -95,7 +106,6 @@
       gap: 40px;
       align-items: center;
     }
-
     @media (max-width: 900px){
       .hero-grid{ grid-template-columns: 1fr; }
     }
@@ -108,7 +118,6 @@
       font-weight: 800;
       letter-spacing: -0.02em;
     }
-
     .brand-mark{
       width: 26px; height: 26px;
       border-radius: 50%;
@@ -171,21 +180,17 @@
       background: rgba(0,0,0,0.10);
       color: var(--ink);
     }
-
     .pill--white{
       background: var(--white);
       color: var(--ink);
       border-color: rgba(0,0,0,0.12);
     }
-
     .pill--accent{
       background: var(--tangerine);
       color: var(--ink);
     }
 
     /* ---------------- SECTION 2 ---------------- */
-
-    .bg-tangerine{ background: var(--tangerine); }
 
     .center{ text-align:center; }
 
@@ -220,15 +225,11 @@
 
     /* ---------------- SECTION 3 ---------------- */
 
-    .bg-burnttang{
-      background: linear-gradient(180deg, #D84727 0%, #5B1BBF 100%);
-      color: var(--white);
-    }
-
     .quote-title{
       font-family: ui-serif, Georgia, serif;
       font-size: clamp(26px, 4vw, 44px);
       margin: 0 0 24px 0;
+      color: var(--white);
     }
 
     .quote-grid{
@@ -236,7 +237,6 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
     }
-
     @media (max-width: 900px){
       .quote-grid{ grid-template-columns: 1fr; }
     }
@@ -273,7 +273,6 @@
       gap: 28px;
       align-items: center;
     }
-
     @media (max-width: 900px){
       .dytm-grid{ grid-template-columns: 1fr; }
     }
@@ -294,14 +293,18 @@
       padding: 12px;
     }
 
-    /* ---------------- FOOTER ---------------- */
+    /* ---------------- FOOTER (solid, not gradient) ---------------- */
 
     footer{
+      position: relative;
+      overflow: hidden;
       background: var(--black);
       color: var(--white);
       border-top: 1px solid var(--hairline-dark);
       padding: 64px 0;
     }
+
+    footer .wrap{ position: relative; z-index: 2; }
 
     .footer-inner{
       display:flex;
@@ -325,14 +328,14 @@
 <body>
 
   <!-- SECTION 1 HERO -->
-  <section class="section" style="background: var(--green);" id="top">
+  <section class="section" id="top">
 
     <div class="bg-layer">
       <!-- KEEP squiggle where it was -->
       <img class="bg-doodle doodle-xl" src="assets/squiggle.png"
            style="top:-40px; left:-180px; opacity:0.55;">
 
-      <!-- brain placement restored -->
+      <!-- brain placement (restored) -->
       <img class="bg-doodle doodle-lg" src="assets/brain.png"
            style="top:40px; left:55%; width:520px; opacity:0.70;">
     </div>
@@ -372,10 +375,11 @@
   </section>
 
   <!-- SECTION 2 VIDEO -->
-  <section class="section bg-tangerine" id="latest">
+  <section class="section" id="latest">
 
     <div class="bg-layer">
 
+      <!-- LABUBU is BACK: render in section 2 and pull up into the green/tangerine seam -->
       <img class="bg-doodle sz-4" src="assets/labubu.png"
            style="left:6%; top:-240px; opacity:0.90;">
 
@@ -383,7 +387,7 @@
       <img class="bg-doodle doodle-xl" src="assets/squiggle.png"
            style="top:-20px; right:-180px; transform:scaleX(-1); opacity:0.45;">
 
-      <!-- baby: right side of YouTube section -->
+      <!-- baby: right side -->
       <img class="bg-doodle sz-3" src="assets/baby.png"
            style="right:6%; top:58%; opacity:0.90;">
 
@@ -413,7 +417,7 @@
   </section>
 
   <!-- SECTION 3 QUOTES -->
-  <section class="section bg-burnttang">
+  <section class="section">
 
     <div class="bg-layer">
       <!-- KEEP squiggle where it was -->
@@ -457,10 +461,10 @@
   </section>
 
   <!-- SECTION 4 TYPEFORM -->
-  <section class="section" style="background: var(--green);" id="guest">
+  <section class="section" id="guest">
 
     <div class="bg-layer">
-      <!-- whale: bottom-left, bigger -->
+      <!-- whale: bottom-left inside section 4 -->
       <img class="bg-doodle sz-4" src="assets/whale.png"
            style="left:2%; bottom:-20%; opacity:0.90;">
 
@@ -490,7 +494,7 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- FOOTER (solid #1F271B) -->
   <footer>
     <div class="wrap">
       <div class="footer-inner">

@@ -23,7 +23,6 @@
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
 
-    /* keep body neutral; gradient lives on .page */
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
@@ -31,19 +30,15 @@
       background: var(--green);
     }
 
-    /* The gradient canvas (this is the key) */
+    /* The gradient canvas */
     .page{
-      /* Make this taller if the gradient still "ends" too soon */
       min-height: 260vh;
-
       background: linear-gradient(
         180deg,
         #C6EF19 0%,
         #C6EF19 12%,
-
         #EF7B45 32%,
         #D84727 62%,
-
         #EF7B45 84%,
         #C6EF19 96%,
         #C6EF19 100%
@@ -65,11 +60,7 @@
       overflow: hidden;
       background: transparent;
     }
-
-    .section > .wrap{
-      position: relative;
-      z-index: 2;
-    }
+    .section > .wrap{ position: relative; z-index: 2; }
 
     /* ---------------- DOODLE BACKGROUND SYSTEM ---------------- */
 
@@ -86,7 +77,11 @@
       filter: brightness(0) invert(1) contrast(1.25);
       mix-blend-mode: normal;
       max-width: none;
+      z-index: 1;
     }
+
+    /* Make sure doodles can sit above content when you want */
+    .bg-doodle.on-top{ z-index: 3; }
 
     /* size tokens */
     .sz-1{ width: 280px; }
@@ -106,7 +101,7 @@
       .sz-1{ width: 220px; }
       .doodle-xl{ width: 520px; }
       .doodle-lg{ width: 420px; }
-      .page{ min-height: 320vh; } /* mobile needs more height */
+      .page{ min-height: 320vh; }
     }
 
     /* ---------------- HERO ---------------- */
@@ -304,7 +299,7 @@
       padding: 12px;
     }
 
-    /* ---------------- FOOTER (solid) ---------------- */
+    /* ---------------- FOOTER ---------------- */
 
     footer{
       position: relative;
@@ -339,6 +334,7 @@
 <body>
 
   <main class="page">
+
     <!-- SECTION 1 HERO -->
     <section class="section" id="top">
       <div class="bg-layer">
@@ -383,14 +379,19 @@
     <!-- SECTION 2 VIDEO -->
     <section class="section" id="latest">
       <div class="bg-layer">
-        <img class="bg-doodle sz-4" src="assets/labubu.png"
-             style="left:6%; top:-240px; opacity:0.90;">
+        <!-- LABUBU: bring forward and place lower so it shows (and still overlaps seam) -->
+        <img class="bg-doodle sz-4 on-top" src="assets/labubu.png"
+             style="left:6%; top:-140px; opacity:0.95;">
+
         <img class="bg-doodle doodle-xl" src="assets/squiggle.png"
              style="top:-20px; right:-180px; transform:scaleX(-1); opacity:0.45;">
+
         <img class="bg-doodle sz-3" src="assets/baby.png"
              style="right:6%; top:58%; opacity:0.90;">
+
+        <!-- SNEAKERS: move up near the top of the video window -->
         <img class="bg-doodle sz-2" src="assets/sneakers.png"
-             style="left:4%; bottom:6%; opacity:0.85;">
+             style="left:4%; top:190px; opacity:0.90;">
       </div>
 
       <div class="wrap center">
@@ -456,10 +457,13 @@
     <!-- SECTION 4 TYPEFORM -->
     <section class="section" id="guest">
       <div class="bg-layer">
+        <!-- WHALE: move down so it isn't clipped -->
         <img class="bg-doodle sz-4" src="assets/whale.png"
-             style="left:2%; bottom:-20%; opacity:0.90;">
+             style="left:2%; bottom:-55%; opacity:0.90;">
+
         <img class="bg-doodle sz-3" src="assets/brain.png"
              style="left:10%; top:18%; opacity:0.85;">
+
         <img class="bg-doodle sz-3" src="assets/dog.png"
              style="right:-6%; top:40%; opacity:0.85;">
       </div>
@@ -479,6 +483,7 @@
         </div>
       </div>
     </section>
+
   </main>
 
   <!-- FOOTER (solid #1F271B) -->

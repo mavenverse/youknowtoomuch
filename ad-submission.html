@@ -615,8 +615,10 @@
         script: document.getElementById('scriptPreview').textContent,
       };
 
-      // TODO: Replace with your backend endpoint
-      console.log('Submission:', data);
+     fetch('https://script.google.com/macros/s/AKfycbwAlcYQtGunwicIEzBXzKf5n6mjrXe4IZTqlmTOZ5gDBAMUCa-KfLFcpVYdsk3DLR8C-g/exec', {
+  method: 'POST',
+  body: JSON.stringify(data)
+}).catch(err => console.error('Submission error:', err));;
 
       // Show success message
       successMsg.classList.add('show');

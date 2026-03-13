@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mavenverse Podcast Ads</title>
+
+  <!-- Favicons (same as main site) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/bfav32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/bfav16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/bfav180.png">
+
+  <style>
+    :root {
+      --green: #C6EF19;
+      --tangerine: #EF7B45;
+      --burnttang: #D84727;
+      --black: #1F271B;
+      --white: #F2F4F3;
+      --ink: #111111;
+      --hairline-dark: rgba(255,255,255,0.10);
+
+      --max: 1120px;
+      --pad: 28px;
+      --r: 999px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color: var(--ink);
+      background: var(--green);
+    }
+
+    .page {
+      background: linear-gradient(
+        180deg,
+        #C6EF19 0%,
+        #C6EF19 12%,
+        #EF7B45 32%,
+        #D84727 62%,
+        #EF7B45 84%,
+        #C6EF19 96%,
+        #C6EF19 100%
+      );
+      min-height: 100vh;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--pad);
+    }
+
+    .section {
+      padding: 56px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section > .wrap {
+      position: relative;
+      z-index: 3;
+    }
+
+    /* ---------- DOODLE BACKGROUND ---------- */
+    .bg-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .bg-doodle {
+      position: absolute;
+      opacity: 0.85;
+      filter: brightness(0) invert(1) contrast(1.25);
+      mix-blend-mode: normal;
+      max-width: none;
+      z-index: 1;
+    }
+
+    .bg-doodle.mid { z-index: 2; }
+
+    .sz-2 { width: 360px; }
+    .sz-3 { width: 460px; }
+    .doodle-lg { width: 520px; }
+
+    /* ---------- HEADER ---------- */
+    .brand-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand-mark {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.10);
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+    }
+
+    .page-title {
+      font-weight: 950;
+      letter-spacing: -0.05em;
+      line-height: 0.92;
+      font-size: clamp(44px, 7vw, 72px);
+      margin: 0 0 14px 0;
+      text-transform: uppercase;
+    }
+
+    .page-desc {
+      margin: 0 0 28px 0;
+      font-size: 18px;
+      line-height: 1.35;
+      max-width: 50ch;
+    }
+
+    /* ---------- FORM CONTAINER ---------- */
+    .form-container {
+      max-width: 720px;
+      background: rgba(255,255,255,0.92);
+      border-radius: 18px;
+      padding: 32px;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .form-section {
+      margin-bottom: 28px;
+    }
+
+    .form-section:last-of-type {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--ink);
+      background: rgba(255,255,255,0.60);
+      transition: all 0.2s;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--tangerine);
+      background: var(--white);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    /* ---------- TEMPLATE CARDS ---------- */
+    .template-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: var(--ink);
+    }
+
+    .template-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    @media (max-width: 800px) {
+      .template-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .template-card {
+      padding: 12px;
+      border: 2px solid rgba(0,0,0,0.12);
+      border-radius: 12px;
+      cursor: pointer;
+      background: rgba(255,255,255,0.40);
+      transition: all 0.2s;
+      text-align: center;
+    }
+
+    .template-card:hover {
+      border-color: var(--tangerine);
+      background: rgba(198,239,25,0.30);
+    }
+
+    .template-card.active {
+      border-color: var(--burnttang);
+      background: var(--green);
+      box-shadow: 0 4px 16px rgba(216,71,39,0.15);
+    }
+
+    .template-card-title {
+      font-weight: 800;
+      font-size: 13px;
+      margin: 0 0 6px 0;
+      color: var(--ink);
+    }
+
+    .template-card-preview {
+      font-size: 11px;
+      color: rgba(0,0,0,0.65);
+      line-height: 1.4;
+    }
+
+    /* ---------- TEMPLATE INPUTS ---------- */
+    .template-inputs {
+      margin-bottom: 14px;
+      padding: 14px;
+      background: rgba(198,239,25,0.12);
+      border-radius: 12px;
+      border: 1px solid rgba(198,239,25,0.25);
+    }
+
+    .hidden { display: none; }
+
+    /* ---------- SCRIPT PREVIEW ---------- */
+    .script-preview-shell {
+      padding: 18px;
+      background: rgba(0,0,0,0.04);
+      border: 1px solid rgba(0,0,0,0.10);
+      border-radius: 12px;
+      margin-bottom: 14px;
+    }
+
+    .script-label {
+      font-size: 12px;
+      font-weight: 800;
+      color: rgba(0,0,0,0.60);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    #scriptPreview {
+      font-family: ui-serif, Georgia, serif;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--ink);
+      margin-bottom: 10px;
+      min-height: 48px;
+    }
+
+    .timer {
+      font-size: 12px;
+      color: rgba(0,0,0,0.60);
+      font-weight: 600;
+    }
+
+    .timer.warning {
+      color: var(--burnttang);
+    }
+
+    /* ---------- BUTTON ---------- */
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 14px 18px;
+      background: var(--burnttang);
+      color: var(--white);
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 6px;
+    }
+
+    .btn:hover {
+      background: var(--tangerine);
+      transform: scale(1.02);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    /* ---------- SUCCESS STATE ---------- */
+    .success-message {
+      display: none;
+      padding: 20px;
+      background: rgba(198,239,25,0.25);
+      border: 1px solid var(--green);
+      border-radius: 12px;
+      text-align: center;
+      color: var(--ink);
+      margin-top: 20px;
+    }
+
+    .success-message.show {
+      display: block;
+      animation: slideIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
+      color: var(--white);
+      border-top: 1px solid var(--hairline-dark);
+      padding: 64px 0;
+    }
+
+    footer .wrap { position: relative; z-index: 2; }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      display: block;
+      margin-bottom: 10px;
+      color: rgba(255,255,255,0.78);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .footer-links a:hover { color: var(--tangerine); }
+
+    /* ---------- MOBILE ---------- */
+    @media (max-width: 700px) {
+      .form-container {
+        padding: 20px;
+      }
+
+      .page-title {
+        font-size: clamp(32px, 6vw, 48px);
+      }
+
+      .bg-doodle {
+        opacity: 0.35;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+
+    <!-- HERO SECTION -->
+    <section class="section">
+      <div class="bg-layer">
+        <img class="bg-doodle sz-3" src="assets/brain.png"
+             style="top:40px; right:8%; opacity:0.60;">
+      </div>
+
+      <div class="wrap">
+        <a class="brand-row" href="./" rel="noopener noreferrer">
+          <div class="brand-mark">m</div>
+          <div>mavenverse</div>
+        </a>
+
+        <h1 class="page-title">FREE AD SLOTS</h1>
+
+        <p class="page-desc">
+          Submit a :15 second ad for the YKTM podcast. Pick a template, fill in your details, and we'll review it for air.
+        </p>
+      </div>
+    </section>
+
+    <!-- FORM SECTION -->
+    <section class="section">
+      <div class="bg-layer">
+        <img class="bg-doodle sz-2" src="assets/sneakers.png"
+             style="left:4%; top:100px; opacity:0.70;">
+        <img class="bg-doodle sz-3" src="assets/dog.png"
+             style="right:6%; top:40%; opacity:0.65;">
+      </div>
+
+      <div class="wrap">
+        <div class="form-container">
+          <form id="adForm">
+
+            <!-- BRAND INFO -->
+            <div class="form-section">
+              <label>Brand name *</label>
+              <input type="text" id="brandName" placeholder="e.g., Oatly" required>
+
+              <label>Brand category *</label>
+              <input type="text" id="category" placeholder="e.g., CPG, fitness, software" required>
+
+              <label>Contact email *</label>
+              <input type="email" id="contactEmail" placeholder="your@email.com" required>
+            </div>
+
+            <!-- TEMPLATE SELECTION -->
+            <div class="form-section">
+              <span class="template-label">Choose your ad template *</span>
+              <div class="template-grid">
+                <div class="template-card active" data-template="problem-solve">
+                  <div class="template-card-title">Problem → Solution</div>
+                  <div class="template-card-preview">We spotted [problem]. That's why [brand] [solution].</div>
+                </div>
+                <div class="template-card" data-template="origin">
+                  <div class="template-card-title">Origin Story</div>
+                  <div class="template-card-preview">[Founder] built [brand] because [why]. Now [impact].</div>
+                </div>
+                <div class="template-card" data-template="proof">
+                  <div class="template-card-title">Real Proof</div>
+                  <div class="template-card-preview">[Specific result]. That's what [brand] does.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TEMPLATE INPUTS -->
+            <div id="problemSolve" class="template-inputs">
+              <label>The problem (what's broken) *</label>
+              <input type="text" id="problem" placeholder="e.g., most protein bars taste like cardboard" maxlength="55" required>
+
+              <label>Your solution *</label>
+              <input type="text" id="solution" placeholder="e.g., we make protein bars that actually taste good" maxlength="65" required>
+
+              <label>Call to action *</label>
+              <input type="text" id="ctaProblemSolve" placeholder="e.g., Try [brand] at [website]" maxlength="40" required>
+            </div>
+
+            <div id="originStory" class="template-inputs hidden">
+              <label>Founder or team *</label>
+              <input type="text" id="founder" placeholder="e.g., Three former athletes" maxlength="40" required>
+
+              <label>Why they built it *</label>
+              <input type="text" id="originWhy" placeholder="e.g., to prove sustainability doesn't have to be boring" maxlength="65" required>
+
+              <label>Current impact or milestone *</label>
+              <input type="text" id="impact" placeholder="e.g., now in 2000+ stores nationwide" maxlength="55" required>
+
+              <label>Call to action *</label>
+              <input type="text" id="ctaOrigin" placeholder="e.g., Find us at [website]" maxlength="40" required>
+            </div>
+
+            <div id="proof" class="template-inputs hidden">
+              <label>Specific result or real example *</label>
+              <textarea id="proofDetail" placeholder="e.g., Sarah lost 30 lbs in 6 months. Or: Our customers save 5 hours a week." maxlength="85" required></textarea>
+
+              <label>What your brand does (one sentence) *</label>
+              <input type="text" id="proofWhat" placeholder="e.g., we make meal plans that actually stick" maxlength="55" required>
+
+              <label>Call to action *</label>
+              <input type="text" id="ctaProof" placeholder="e.g., Start free at [website]" maxlength="40" required>
+            </div>
+
+            <!-- SCRIPT PREVIEW -->
+            <div class="form-section">
+              <div class="script-preview-shell">
+                <div class="script-label">Your 15-second script</div>
+                <div id="scriptPreview">Select a template and fill in details to see your script.</div>
+                <div class="timer" id="timer"></div>
+              </div>
+            </div>
+
+            <!-- SUBMIT BUTTON -->
+            <button type="submit" class="btn">Submit ad</button>
+
+            <!-- SUCCESS MESSAGE -->
+            <div class="success-message" id="successMessage">
+              <p><strong>Thanks!</strong> We'll review your ad and get back to you soon.</p>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER (same as main site) -->
+  <footer>
+    <div class="wrap">
+      <div class="footer-inner">
+        <div>
+          <a href="./" style="color:inherit; text-decoration:none; font-weight:800;">mavenverse</a><br/>
+          <span style="opacity:0.75;">Brands don't need influencers. They need communities. mavenverse connects them to trusted, high-performing groups that protect their integrity. We vet community leaders, protect their trust, and only bring in brands that belong.
+          </span>
+        </div>
+
+        <div class="footer-links">
+          <a href="./">Back to podcast</a>
+          <a href="https://mavenverse.com" target="_blank" rel="noopener noreferrer">mavenverse.com</a>
+          <a href="https://mavenverse.typeform.com/inquiry" target="_blank" rel="noopener noreferrer">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById('adForm');
+    const templateCards = document.querySelectorAll('.template-card');
+    const templateInputs = document.querySelectorAll('.template-inputs');
+    const scriptPreview = document.getElementById('scriptPreview');
+    const timerEl = document.getElementById('timer');
+    const successMsg = document.getElementById('successMessage');
+    let selectedTemplate = 'problem-solve';
+
+    // TEMPLATE SELECTION
+    templateCards.forEach(card => {
+      card.addEventListener('click', () => {
+        templateCards.forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+        selectedTemplate = card.dataset.template;
+
+        templateInputs.forEach(input => input.classList.add('hidden'));
+        document.getElementById(
+          selectedTemplate === 'problem-solve' ? 'problemSolve' :
+          selectedTemplate === 'origin' ? 'originStory' :
+          'proof'
+        ).classList.remove('hidden');
+
+        updatePreview();
+      });
+    });
+
+    // LIVE PREVIEW ON INPUT
+    document.querySelectorAll('input[type="text"], input[type="email"], textarea').forEach(input => {
+      input.addEventListener('input', updatePreview);
+    });
+
+    function updatePreview() {
+      let script = '';
+      let wordCount = 0;
+
+      if (selectedTemplate === 'problem-solve') {
+        const problem = document.getElementById('problem').value || '[problem]';
+        const solution = document.getElementById('solution').value || '[solution]';
+        const cta = document.getElementById('ctaProblemSolve').value || '[CTA]';
+        const brand = document.getElementById('brandName').value || '[brand]';
+        script = `We spotted ${problem}. That's why ${brand} ${solution}. ${cta}.`;
+      } else if (selectedTemplate === 'origin') {
+        const founder = document.getElementById('founder').value || '[founder]';
+        const why = document.getElementById('originWhy').value || '[why]';
+        const impact = document.getElementById('impact').value || '[impact]';
+        const cta = document.getElementById('ctaOrigin').value || '[CTA]';
+        const brand = document.getElementById('brandName').value || '[brand]';
+        script = `${founder} built ${brand} because ${why}. Now ${impact}. ${cta}.`;
+      } else if (selectedTemplate === 'proof') {
+        const detail = document.getElementById('proofDetail').value || '[result]';
+        const what = document.getElementById('proofWhat').value || '[what brand does]';
+        const cta = document.getElementById('ctaProof').value || '[CTA]';
+        const brand = document.getElementById('brandName').value || '[brand]';
+        script = `${detail}. That's what ${brand} does. ${cta}.`;
+      }
+
+      wordCount = script.split(/\s+/).filter(w => w.length > 0).length;
+      const estSeconds = Math.round(wordCount / 2.17); // 130 wpm = 2.17 words/sec for natural speech
+
+      scriptPreview.textContent = script;
+      timerEl.classList.remove('warning');
+      timerEl.textContent = `≈ ${estSeconds} seconds`;
+
+      if (estSeconds > 16) {
+        timerEl.classList.add('warning');
+        timerEl.textContent += ' — trim a few words';
+      } else if (estSeconds < 12) {
+        timerEl.textContent += ' (add more detail for better timing)';
+      }
+    }
+
+    // FORM SUBMISSION
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const data = {
+        brandName: document.getElementById('brandName').value,
+        category: document.getElementById('category').value,
+        contactEmail: document.getElementById('contactEmail').value,
+        template: selectedTemplate,
+        script: document.getElementById('scriptPreview').textContent,
+      };
+
+      // TODO: Replace with your backend endpoint
+      console.log('Submission:', data);
+
+      // Show success message
+      successMsg.classList.add('show');
+      form.style.opacity = '0.6';
+      form.style.pointerEvents = 'none';
+
+      // Reset after delay
+      setTimeout(() => {
+        form.reset();
+        form.style.opacity = '1';
+        form.style.pointerEvents = 'auto';
+        successMsg.classList.remove('show');
+        templateCards[0].click();
+        updatePreview();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 2500);
+    });
+
+    // Initialize
+    updatePreview();
+  </script>
+</body>
+</html>

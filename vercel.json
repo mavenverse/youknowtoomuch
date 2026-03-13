@@ -1,8 +1,0 @@
-{
-  "rewrites": [
-    {
-      "source": "/submit-ad",
-      "destination": "/submit-ad.html"
-    }
-  ]
-}

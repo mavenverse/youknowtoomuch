@@ -454,6 +454,31 @@
       color: var(--burnttang);
     }
 
+    .field-error{
+      display: none;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--burnttang);
+      margin-top: 5px;
+    }
+    .field-error.visible{ display: block; }
+
+    .form-field input.invalid,
+    .form-field textarea.invalid{
+      border-color: var(--burnttang);
+      background: rgba(255,255,255,0.90);
+    }
+
+    .word-count{
+      font-size: 11px;
+      font-weight: 700;
+      text-align: right;
+      margin-top: 5px;
+      opacity: 0.55;
+      letter-spacing: 0.04em;
+    }
+    .word-count.ok{ color: #2a8a2a; opacity: 0.85; }
+
     /* ---------------- FOOTER ---------------- */
 
     footer{
@@ -775,23 +800,27 @@
             <div class="big-word">DYKTM?</div>
             <p>To be a guest or for more information about the show, submit the form below.</p>
 
-            <form class="guest-form" id="guestForm">
+            <form class="guest-form" id="guestForm" novalidate>
               <div class="form-field">
                 <label for="gf-name">Name</label>
-                <input type="text" id="gf-name" name="name" placeholder="Your name" required />
+                <input type="text" id="gf-name" name="name" placeholder="Your name" />
+                <div class="field-error" id="err-name">Please enter your name.</div>
               </div>
 
               <div class="form-field">
                 <label for="gf-email">Email</label>
-                <input type="email" id="gf-email" name="email" placeholder="your@email.com" required />
+                <input type="email" id="gf-email" name="email" placeholder="your@email.com" />
+                <div class="field-error" id="err-email">Please enter a valid email address (e.g. you@example.com).</div>
               </div>
 
               <div class="form-field">
                 <label for="gf-topic">
                   What do you know too much about?
-                  <span class="field-hint">Like, obsessively, and has nothing to do with your job — unless it led you to your job.</span>
+                  <span class="field-hint">Like, obsessively, and has nothing to do with your job — unless it led you to your job. Minimum 50 words.</span>
                 </label>
-                <textarea id="gf-topic" name="topic" placeholder="Tell us..." required></textarea>
+                <textarea id="gf-topic" name="topic" placeholder="Tell us..."></textarea>
+                <div class="word-count" id="word-count">0 / 50 words</div>
+                <div class="field-error" id="err-topic">Please write at least 50 words — give us the full picture!</div>
               </div>
 
               <button type="submit" class="form-submit" id="guestSubmitBtn">Submit</button>
@@ -829,33 +858,91 @@
   </footer>
 
   <script>
-    // ─── Guest form → Google Sheets ──────────────────────────────────────────
-    // Replace the URL below with your deployed Google Apps Script web app URL.
-    // See code.gs in this repo for the Apps Script code.
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz7PkMF3cG_1sOw6A_wpEJ0YnnVW6BN2jdasO1HXh6CpD9CteIaKcTjRRvKnX7GyDSh/exec';
 
-    const guestForm   = document.getElementById('guestForm');
-    const submitBtn   = document.getElementById('guestSubmitBtn');
-    const formMsg     = document.getElementById('guestFormMsg');
+    const guestForm  = document.getElementById('guestForm');
+    const submitBtn  = document.getElementById('guestSubmitBtn');
+    const formMsg    = document.getElementById('guestFormMsg');
+    const topicEl    = document.getElementById('gf-topic');
+    const wordCountEl= document.getElementById('word-count');
+
+    const MIN_WORDS = 50;
+
+    function countWords(str) {
+      return str.trim().split(/\s+/).filter(w => w.length > 0).length;
+    }
+
+    function isValidEmail(val) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+    }
+
+    function setError(inputId, errId, show) {
+      const input = document.getElementById(inputId);
+      const err   = document.getElementById(errId);
+      if (show) {
+        input.classList.add('invalid');
+        err.classList.add('visible');
+      } else {
+        input.classList.remove('invalid');
+        err.classList.remove('visible');
+      }
+    }
+
+    // Live word counter on the topic field
+    topicEl.addEventListener('input', function() {
+      const words = countWords(topicEl.value);
+      wordCountEl.textContent = words + ' / ' + MIN_WORDS + ' words';
+      if (words >= MIN_WORDS) {
+        wordCountEl.classList.add('ok');
+        setError('gf-topic', 'err-topic', false);
+      } else {
+        wordCountEl.classList.remove('ok');
+      }
+    });
+
+    // Clear field errors on input
+    document.getElementById('gf-name').addEventListener('input', function() {
+      if (this.value.trim()) setError('gf-name', 'err-name', false);
+    });
+    document.getElementById('gf-email').addEventListener('input', function() {
+      if (isValidEmail(this.value.trim())) setError('gf-email', 'err-email', false);
+    });
 
     guestForm.addEventListener('submit', async function(e) {
       e.preventDefault();
+
+      const name  = document.getElementById('gf-name').value.trim();
+      const email = document.getElementById('gf-email').value.trim();
+      const topic = topicEl.value.trim();
+      const words = countWords(topic);
+
+      // Validate all fields and show specific errors
+      let valid = true;
+
+      if (!name) {
+        setError('gf-name', 'err-name', true);
+        valid = false;
+      }
+      if (!email || !isValidEmail(email)) {
+        setError('gf-email', 'err-email', true);
+        valid = false;
+      }
+      if (!topic || words < MIN_WORDS) {
+        setError('gf-topic', 'err-topic', true);
+        valid = false;
+      }
+
+      if (!valid) return;
 
       submitBtn.disabled    = true;
       submitBtn.textContent = 'Sending…';
       formMsg.className     = 'form-message';
       formMsg.textContent   = '';
 
-      const payload = {
-        name:  document.getElementById('gf-name').value.trim(),
-        email: document.getElementById('gf-email').value.trim(),
-        topic: document.getElementById('gf-topic').value.trim(),
-      };
-
       try {
-        const res = await fetch(APPS_SCRIPT_URL, {
+        const res  = await fetch(APPS_SCRIPT_URL, {
           method: 'POST',
-          body:   JSON.stringify(payload),
+          body:   JSON.stringify({ name, email, topic }),
         });
         const json = await res.json();
 
@@ -863,6 +950,8 @@
           formMsg.className   = 'form-message success';
           formMsg.textContent = '🎉 Got it! We\'ll be in touch if it\'s a match.';
           guestForm.reset();
+          wordCountEl.textContent = '0 / ' + MIN_WORDS + ' words';
+          wordCountEl.classList.remove('ok');
         } else {
           throw new Error(json.error || 'Unknown error');
         }

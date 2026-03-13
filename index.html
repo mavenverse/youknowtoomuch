@@ -219,26 +219,78 @@
   }
 }
 
-    .video-shell{
-      max-width: 760px;
+    /* episodes grid */
+    .episodes-grid{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      max-width: 900px;
       margin: 0 auto;
+    }
+    @media (max-width: 600px){
+      .episodes-grid{ grid-template-columns: 1fr; }
+    }
+
+    .episode-card{
       border-radius: 18px;
       overflow: hidden;
-      background: rgba(255,255,255,0.22);
-      border: 1px solid rgba(0,0,0,0.10);
+      border: 1px solid rgba(0,0,0,0.12);
+      background: rgba(255,255,255,0.20);
     }
 
-    .video-shell iframe{
-      width:100%;
+    .episode-thumb{
+      width: 100%;
       aspect-ratio: 16/9;
-      border:0;
-      display:block;
+      background: var(--black);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--white);
     }
 
-    .caption{
+    .episode-thumb-label{
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.55;
+    }
+
+    .episode-thumb-num{
+      font-weight: 950;
+      font-size: clamp(32px, 5vw, 52px);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--green);
+    }
+
+    .episode-thumb-coming{
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      opacity: 0.45;
+    }
+
+    .episode-caption{
+      padding: 14px 16px;
       font-family: ui-serif, Georgia, serif;
-      font-size: 20px;
-      margin-top: 18px;
+      font-size: 15px;
+      line-height: 1.35;
+      color: var(--ink);
+    }
+
+    .episode-caption strong{
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      opacity: 0.65;
+      display: block;
+      margin-bottom: 4px;
     }
 
     /* ---------------- SECTION 3 ---------------- */
@@ -302,13 +354,104 @@
       text-transform: uppercase;
     }
 
-    .typeform-shell{
+    /* guest submission form */
+    .guest-form{
       margin-top: 18px;
       border-radius: 18px;
-      overflow: hidden;
       border: 1px solid rgba(0,0,0,0.14);
       background: rgba(255,255,255,0.20);
-      padding: 12px;
+      padding: 24px 22px;
+    }
+
+    .form-field{
+      margin-bottom: 18px;
+    }
+
+    .form-field label{
+      display: block;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      opacity: 0.85;
+    }
+
+    .form-field .field-hint{
+      display: block;
+      font-size: 12px;
+      font-weight: 400;
+      font-style: italic;
+      letter-spacing: 0;
+      text-transform: none;
+      opacity: 0.65;
+      margin-bottom: 6px;
+    }
+
+    .form-field input,
+    .form-field textarea{
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(0,0,0,0.20);
+      background: rgba(255,255,255,0.70);
+      font-family: inherit;
+      font-size: 15px;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.15s, background 0.15s;
+      -webkit-appearance: none;
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus{
+      border-color: var(--burnttang);
+      background: rgba(255,255,255,0.92);
+    }
+
+    .form-field textarea{
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-submit{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 28px;
+      border-radius: var(--r);
+      background: var(--ink);
+      color: var(--green);
+      font-weight: 800;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.15s;
+      width: 100%;
+      margin-top: 4px;
+    }
+    .form-submit:hover{ opacity: 0.85; }
+    .form-submit:disabled{ opacity: 0.5; cursor: not-allowed; }
+
+    .form-message{
+      margin-top: 14px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      display: none;
+    }
+    .form-message.success{
+      display: block;
+      background: rgba(198,239,25,0.55);
+      border: 1px solid rgba(0,0,0,0.12);
+      color: var(--ink);
+    }
+    .form-message.error{
+      display: block;
+      background: rgba(216,71,39,0.15);
+      border: 1px solid rgba(216,71,39,0.30);
+      color: var(--burnttang);
     }
 
     /* ---------------- FOOTER ---------------- */
@@ -516,18 +659,58 @@
     about that thing you didn’t know about.
   </div>
 
-        <div class="video-shell">
-          <iframe
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-            title="Latest episode"
-            allowfullscreen>
-          </iframe>
-        </div>
+  <div class="episodes-grid">
 
-        <div class="caption">
-          Latest YKTM Episode: Ideas with Tom Christmann
-        </div>
+    <div class="episode-card">
+      <div class="episode-thumb">
+        <div class="episode-thumb-label">Episode</div>
+        <div class="episode-thumb-num">01</div>
+        <div class="episode-thumb-coming">Coming Soon</div>
       </div>
+      <div class="episode-caption">
+        <strong>Episode 1</strong>
+        Stay tuned.
+      </div>
+    </div>
+
+    <div class="episode-card">
+      <div class="episode-thumb">
+        <div class="episode-thumb-label">Episode</div>
+        <div class="episode-thumb-num">02</div>
+        <div class="episode-thumb-coming">Coming Soon</div>
+      </div>
+      <div class="episode-caption">
+        <strong>Episode 2</strong>
+        Stay tuned.
+      </div>
+    </div>
+
+    <div class="episode-card">
+      <div class="episode-thumb">
+        <div class="episode-thumb-label">Episode</div>
+        <div class="episode-thumb-num">03</div>
+        <div class="episode-thumb-coming">Coming Soon</div>
+      </div>
+      <div class="episode-caption">
+        <strong>Episode 3</strong>
+        Stay tuned.
+      </div>
+    </div>
+
+    <div class="episode-card">
+      <div class="episode-thumb">
+        <div class="episode-thumb-label">Episode</div>
+        <div class="episode-thumb-num">04</div>
+        <div class="episode-thumb-coming">Coming Soon</div>
+      </div>
+      <div class="episode-caption">
+        <strong>Episode 4</strong>
+        Stay tuned.
+      </div>
+    </div>
+
+  </div>
+</div>
     </section>
 
     <!-- SECTION 3 QUOTES -->
@@ -592,9 +775,29 @@
             <div class="big-word">DYKTM?</div>
             <p>To be a guest or for more information about the show, submit the form below.</p>
 
-            <div class="typeform-shell">
-              <div data-tf-live="01KFBY187YHT9EQ38XPJE2DBWG"></div>
-            </div>
+            <form class="guest-form" id="guestForm">
+              <div class="form-field">
+                <label for="gf-name">Name</label>
+                <input type="text" id="gf-name" name="name" placeholder="Your name" required />
+              </div>
+
+              <div class="form-field">
+                <label for="gf-email">Email</label>
+                <input type="email" id="gf-email" name="email" placeholder="your@email.com" required />
+              </div>
+
+              <div class="form-field">
+                <label for="gf-topic">
+                  What do you know too much about?
+                  <span class="field-hint">Like, obsessively, and has nothing to do with your job — unless it led you to your job.</span>
+                </label>
+                <textarea id="gf-topic" name="topic" placeholder="Tell us..." required></textarea>
+              </div>
+
+              <button type="submit" class="form-submit" id="guestSubmitBtn">Submit</button>
+
+              <div class="form-message" id="guestFormMsg"></div>
+            </form>
           </div>
         </div>
       </div>
@@ -625,6 +828,53 @@
     </div>
   </footer>
 
-  <script src="//embed.typeform.com/next/embed.js"></script>
+  <script>
+    // ─── Guest form → Google Sheets ──────────────────────────────────────────
+    // Replace the URL below with your deployed Google Apps Script web app URL.
+    // See code.gs in this repo for the Apps Script code.
+    const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_WEB_APP_URL';
+
+    const guestForm   = document.getElementById('guestForm');
+    const submitBtn   = document.getElementById('guestSubmitBtn');
+    const formMsg     = document.getElementById('guestFormMsg');
+
+    guestForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      submitBtn.disabled    = true;
+      submitBtn.textContent = 'Sending…';
+      formMsg.className     = 'form-message';
+      formMsg.textContent   = '';
+
+      const payload = {
+        name:  document.getElementById('gf-name').value.trim(),
+        email: document.getElementById('gf-email').value.trim(),
+        topic: document.getElementById('gf-topic').value.trim(),
+      };
+
+      try {
+        const res = await fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          body:   JSON.stringify(payload),
+        });
+        const json = await res.json();
+
+        if (json.result === 'success') {
+          formMsg.className   = 'form-message success';
+          formMsg.textContent = '🎉 Got it! We\'ll be in touch if it\'s a match.';
+          guestForm.reset();
+        } else {
+          throw new Error(json.error || 'Unknown error');
+        }
+      } catch (err) {
+        formMsg.className   = 'form-message error';
+        formMsg.textContent = 'Something went wrong. Please try again or email us directly.';
+        console.error(err);
+      } finally {
+        submitBtn.disabled    = false;
+        submitBtn.textContent = 'Submit';
+      }
+    });
+  </script>
 </body>
 </html>

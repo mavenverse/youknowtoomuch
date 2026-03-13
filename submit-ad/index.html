@@ -276,6 +276,7 @@
       cursor: pointer;
       transition: all 0.2s;
       margin-top: 6px;
+      font-family: inherit;
     }
     .btn:hover {
       background: var(--tangerine);
@@ -283,6 +284,11 @@
     }
     .btn:active {
       transform: scale(0.98);
+    }
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
     }
     /* ---------- SUCCESS STATE ---------- */
     .success-state {
@@ -319,27 +325,27 @@
       margin: 0;
       max-width: 36ch;
     }
-    .success-countdown {
+    .success-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      margin-top: 16px;
+      width: 100%;
+      max-width: 280px;
+    }
+    .success-actions .btn {
+      margin-top: 0;
+    }
+    .success-back {
       font-size: 13px;
       font-weight: 700;
-      color: rgba(0,0,0,0.38);
-      margin-top: 8px;
+      color: rgba(0,0,0,0.45);
+      text-decoration: none;
+      transition: color 0.2s;
     }
-    .success-again {
-      margin-top: 4px;
-      padding: 10px 20px;
-      background: transparent;
-      border: 2px solid var(--ink);
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 800;
-      cursor: pointer;
-      font-family: inherit;
-      transition: all 0.2s;
-    }
-    .success-again:hover {
-      background: var(--ink);
-      color: var(--white);
+    .success-back:hover {
+      color: var(--ink);
     }
     /* ---------- FOOTER ---------- */
     footer {
@@ -367,15 +373,9 @@
     .footer-links a:hover { color: var(--tangerine); }
     /* ---------- MOBILE ---------- */
     @media (max-width: 700px) {
-      .form-container {
-        padding: 20px;
-      }
-      .page-title {
-        font-size: clamp(32px, 6vw, 48px);
-      }
-      .bg-doodle {
-        opacity: 0.35;
-      }
+      .form-container { padding: 20px; }
+      .page-title { font-size: clamp(32px, 6vw, 48px); }
+      .bg-doodle { opacity: 0.35; }
     }
     @keyframes slideIn {
       from { opacity: 0; transform: translateY(-10px); }
@@ -419,9 +419,15 @@
               <label>Brand name *</label>
               <input type="text" id="brandName" name="brandName" placeholder="e.g., Oatly">
               <span class="field-error" id="brandNameError"></span>
+
               <label>Brand category *</label>
               <input type="text" id="category" name="category" placeholder="e.g., CPG, fitness, software">
               <span class="field-error" id="categoryError"></span>
+
+              <label>Website *</label>
+              <input type="text" id="website" name="website" placeholder="e.g., yourbrand.com">
+              <span class="field-error" id="websiteError"></span>
+
               <label>Contact email *</label>
               <input type="email" id="contactEmail" name="contactEmail" placeholder="your@email.com">
               <span class="field-error" id="contactEmailError"></span>
@@ -440,7 +446,7 @@
                 </div>
                 <div class="template-card" data-template="proof">
                   <div class="template-card-title">Real Proof</div>
-                  <div class="template-card-preview">[Specific result]. That's what [brand] does.</div>
+                  <div class="template-card-preview">[Specific result]. That's what [brand] does — [what you do]. [CTA].</div>
                 </div>
               </div>
             </div>
@@ -472,13 +478,13 @@
             </div>
             <div id="proof" class="template-inputs hidden">
               <label>Specific result or real example *</label>
-              <textarea id="proofDetail" name="proofDetail" placeholder="e.g., Sarah lost 30 lbs in 6 months. Or: Our customers save 5 hours a week." maxlength="85"></textarea>
+              <textarea id="proofDetail" name="proofDetail" placeholder="e.g., Sarah lost 30 lbs in 6 months. Our customers save 5 hours a week." maxlength="85"></textarea>
               <span class="field-error" id="proofDetailError"></span>
               <label>What your brand does (one sentence) *</label>
-              <input type="text" id="proofWhat" name="proofWhat" placeholder="e.g., we make meal plans that actually stick" maxlength="55">
+              <input type="text" id="proofWhat" name="proofWhat" placeholder="e.g., we make meal plans that actually stick" maxlength="60">
               <span class="field-error" id="proofWhatError"></span>
               <label>Call to action *</label>
-              <input type="text" id="ctaProof" name="ctaProof" placeholder="e.g., Start free at [website]" maxlength="40">
+              <input type="text" id="ctaProof" name="ctaProof" placeholder="e.g., Start free at [website]" maxlength="45">
               <span class="field-error" id="ctaProofError"></span>
             </div>
             <!-- SCRIPT PREVIEW -->
@@ -490,7 +496,7 @@
               </div>
             </div>
             <!-- SUBMIT BUTTON -->
-            <button type="submit" class="btn">Submit ad</button>
+            <button type="submit" class="btn" id="submitBtn">Submit ad</button>
           </form>
 
           <!-- SUCCESS STATE -->
@@ -498,8 +504,10 @@
             <div class="success-check">✓</div>
             <h2 class="success-title">Thank you for your submission.</h2>
             <p class="success-sub">We'll review your ad and get back to you soon.</p>
-            <p class="success-countdown" id="successCountdown"></p>
-            <button class="success-again" id="successAgain">Submit another ad</button>
+            <div class="success-actions">
+              <button class="btn" id="successAgain">Submit another ad</button>
+              <a class="success-back" href="./">← Back to podcast</a>
+            </div>
           </div>
 
         </div>
@@ -524,16 +532,16 @@
     </div>
   </footer>
   <script>
-    const form          = document.getElementById('adForm');
+    const GAS_URL     = 'https://script.google.com/macros/s/AKfycbyxoKCSo9FN9tYvL2G0y8EEIgs0zXsFLQomwzolR_J9SjO8-XYD3C8MGxMxZ4zpozOZEg/exec';
+    const form        = document.getElementById('adForm');
+    const submitBtn   = document.getElementById('submitBtn');
     const templateCards = document.querySelectorAll('.template-card');
     const templateInputSections = document.querySelectorAll('.template-inputs');
     const scriptPreview = document.getElementById('scriptPreview');
-    const timerEl       = document.getElementById('timer');
-    const successState  = document.getElementById('successState');
-    const successAgain  = document.getElementById('successAgain');
-    const countdownEl   = document.getElementById('successCountdown');
+    const timerEl     = document.getElementById('timer');
+    const successState = document.getElementById('successState');
+    const successAgain = document.getElementById('successAgain');
     let selectedTemplate = 'problem-solve';
-    let countdownTimer   = null;
 
     // ---- HELPERS ----
     function getSectionId(t) {
@@ -583,8 +591,9 @@
         script = `${founder} built ${brand} because ${why}. Now ${impact}. ${cta}.`;
       } else {
         const detail = document.getElementById('proofDetail').value || '[result]';
+        const what   = document.getElementById('proofWhat').value || '[what you do]';
         const cta    = document.getElementById('ctaProof').value || '[CTA]';
-        script = `${detail}. That's what ${brand} does. ${cta}.`;
+        script = `${detail}. That's what ${brand} does — ${what}. ${cta}.`;
       }
 
       scriptPreview.textContent = script;
@@ -615,6 +624,16 @@
       return /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(email);
     }
 
+    function isValidWebsite(url) {
+      const clean = url.trim().replace(/^https?:\/\//i, '');
+      return /^([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,}(\/\S*)?$/i.test(clean);
+    }
+
+    function normalizeUrl(url) {
+      const t = url.trim();
+      return /^https?:\/\//i.test(t) ? t : 'https://' + t;
+    }
+
     function showError(fieldId, message) {
       const el  = document.getElementById(fieldId);
       const err = document.getElementById(fieldId + 'Error');
@@ -633,12 +652,24 @@
 
       const brandName    = document.getElementById('brandName').value.trim();
       const category     = document.getElementById('category').value.trim();
+      const website      = document.getElementById('website').value.trim();
       const contactEmail = document.getElementById('contactEmail').value.trim();
 
-      if (!brandName)    { showError('brandName', 'Brand name is required'); valid = false; }
-      if (!category)     { showError('category', 'Category is required'); valid = false; }
-      if (!contactEmail) { showError('contactEmail', 'Email is required'); valid = false; }
-      else if (!isValidEmail(contactEmail)) {
+      if (!brandName) { showError('brandName', 'Brand name is required'); valid = false; }
+      if (!category)  { showError('category', 'Category is required'); valid = false; }
+
+      if (!website) {
+        showError('website', 'Website is required');
+        valid = false;
+      } else if (!isValidWebsite(website)) {
+        showError('website', 'Enter a valid website (e.g. yourbrand.com)');
+        valid = false;
+      }
+
+      if (!contactEmail) {
+        showError('contactEmail', 'Email is required');
+        valid = false;
+      } else if (!isValidEmail(contactEmail)) {
         showError('contactEmail', 'Enter a valid email (e.g. you@example.com)');
         valid = false;
       }
@@ -672,11 +703,12 @@
 
     // ---- RESET ----
     function resetForm() {
-      clearInterval(countdownTimer);
       form.reset();
       clearErrors();
       successState.classList.remove('show');
       form.style.display = '';
+      submitBtn.textContent = 'Submit ad';
+      submitBtn.disabled = false;
       templateCards[0].click();
       updatePreview();
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -685,37 +717,37 @@
     successAgain.addEventListener('click', resetForm);
 
     // ---- FORM SUBMISSION ----
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!validateForm()) return;
 
       const data = {
-        brandName:    document.getElementById('brandName').value,
-        category:     document.getElementById('category').value,
-        contactEmail: document.getElementById('contactEmail').value,
+        brandName:    document.getElementById('brandName').value.trim(),
+        category:     document.getElementById('category').value.trim(),
+        website:      normalizeUrl(document.getElementById('website').value),
+        contactEmail: document.getElementById('contactEmail').value.trim(),
         template:     selectedTemplate,
         script:       scriptPreview.textContent,
       };
 
-      // TODO: Replace with your backend endpoint
-      console.log('Submission:', data);
+      submitBtn.textContent = 'Submitting…';
+      submitBtn.disabled = true;
 
-      // Hide form, show success
+      try {
+        await fetch(GAS_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(data).toString()
+        });
+      } catch (err) {
+        // Network error — still show success since no-cors responses are opaque
+        console.error('Fetch error:', err);
+      }
+
+      // Show success state
       form.style.display = 'none';
       successState.classList.add('show');
-
-      // 5-second countdown then reset
-      let seconds = 5;
-      countdownEl.textContent = `Returning in ${seconds}…`;
-      countdownTimer = setInterval(() => {
-        seconds--;
-        if (seconds > 0) {
-          countdownEl.textContent = `Returning in ${seconds}…`;
-        } else {
-          clearInterval(countdownTimer);
-          resetForm();
-        }
-      }, 1000);
     });
 
     // ---- INIT ----

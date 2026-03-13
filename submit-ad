@@ -423,13 +423,13 @@
             <!-- BRAND INFO -->
             <div class="form-section">
               <label>Brand name *</label>
-              <input type="text" id="brandName" placeholder="e.g., Oatly" required>
+              <input type="text" id="brandName" name="brandName" placeholder="e.g., Oatly" required>
 
               <label>Brand category *</label>
-              <input type="text" id="category" placeholder="e.g., CPG, fitness, software" required>
+              <input type="text" id="category" name="category" placeholder="e.g., CPG, fitness, software" required>
 
               <label>Contact email *</label>
-              <input type="email" id="contactEmail" placeholder="your@email.com" required>
+              <input type="email" id="contactEmail" name="contactEmail" placeholder="your@email.com" required>
             </div>
 
             <!-- TEMPLATE SELECTION -->
@@ -454,38 +454,38 @@
             <!-- TEMPLATE INPUTS -->
             <div id="problemSolve" class="template-inputs">
               <label>The problem (what's broken) *</label>
-              <input type="text" id="problem" placeholder="e.g., most protein bars taste like cardboard" maxlength="55" required>
+              <input type="text" id="problem" name="problem" placeholder="e.g., most protein bars taste like cardboard" maxlength="55" required>
 
               <label>Your solution *</label>
-              <input type="text" id="solution" placeholder="e.g., we make protein bars that actually taste good" maxlength="65" required>
+              <input type="text" id="solution" name="solution" placeholder="e.g., we make protein bars that actually taste good" maxlength="65" required>
 
               <label>Call to action *</label>
-              <input type="text" id="ctaProblemSolve" placeholder="e.g., Try [brand] at [website]" maxlength="40" required>
+              <input type="text" id="ctaProblemSolve" name="ctaProblemSolve" placeholder="e.g., Try [brand] at [website]" maxlength="40" required>
             </div>
 
             <div id="originStory" class="template-inputs hidden">
               <label>Founder or team *</label>
-              <input type="text" id="founder" placeholder="e.g., Three former athletes" maxlength="40" required>
+              <input type="text" id="founder" name="founder" placeholder="e.g., Three former athletes" maxlength="40" required>
 
               <label>Why they built it *</label>
-              <input type="text" id="originWhy" placeholder="e.g., to prove sustainability doesn't have to be boring" maxlength="65" required>
+              <input type="text" id="originWhy" name="originWhy" placeholder="e.g., to prove sustainability doesn't have to be boring" maxlength="65" required>
 
               <label>Current impact or milestone *</label>
-              <input type="text" id="impact" placeholder="e.g., now in 2000+ stores nationwide" maxlength="55" required>
+              <input type="text" id="impact" name="impact" placeholder="e.g., now in 2000+ stores nationwide" maxlength="55" required>
 
               <label>Call to action *</label>
-              <input type="text" id="ctaOrigin" placeholder="e.g., Find us at [website]" maxlength="40" required>
+              <input type="text" id="ctaOrigin" name="ctaOrigin" placeholder="e.g., Find us at [website]" maxlength="40" required>
             </div>
 
             <div id="proof" class="template-inputs hidden">
               <label>Specific result or real example *</label>
-              <textarea id="proofDetail" placeholder="e.g., Sarah lost 30 lbs in 6 months. Or: Our customers save 5 hours a week." maxlength="85" required></textarea>
+              <textarea id="proofDetail" name="proofDetail" placeholder="e.g., Sarah lost 30 lbs in 6 months. Or: Our customers save 5 hours a week." maxlength="85" required></textarea>
 
               <label>What your brand does (one sentence) *</label>
-              <input type="text" id="proofWhat" placeholder="e.g., we make meal plans that actually stick" maxlength="55" required>
+              <input type="text" id="proofWhat" name="proofWhat" placeholder="e.g., we make meal plans that actually stick" maxlength="55" required>
 
               <label>Call to action *</label>
-              <input type="text" id="ctaProof" placeholder="e.g., Start free at [website]" maxlength="40" required>
+              <input type="text" id="ctaProof" name="ctaProof" placeholder="e.g., Start free at [website]" maxlength="40" required>
             </div>
 
             <!-- SCRIPT PREVIEW -->
@@ -615,10 +615,8 @@
         script: document.getElementById('scriptPreview').textContent,
       };
 
-     fetch('https://script.google.com/macros/s/AKfycbwAlcYQtGunwicIEzBXzKf5n6mjrXe4IZTqlmTOZ5gDBAMUCa-KfLFcpVYdsk3DLR8C-g/exec', {
-  method: 'POST',
-  body: JSON.stringify(data)
-}).catch(err => console.error('Submission error:', err));;
+      // TODO: Replace with your backend endpoint
+      console.log('Submission:', data);
 
       // Show success message
       successMsg.classList.add('show');

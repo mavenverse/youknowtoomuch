@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>You Know Too Much</title>
 
-  <!-- Favicons -->
   <link rel="icon" type="image/png" sizes="32x32" href="assets/bfav32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/bfav16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/bfav180.png">
@@ -93,7 +92,6 @@
     .doodle-xl{ width: 760px; }
     .doodle-lg{ width: 520px; }
 
-    /* HERO */
     .hero-grid{
       display:grid;
       grid-template-columns: 1.2fr 0.9fr;
@@ -160,7 +158,6 @@
       transform-origin: center left;
     }
 
-    /* PILLS */
     .pill{
       display:inline-flex;
       align-items:center;
@@ -182,7 +179,6 @@
       border-color: rgba(0,0,0,0.12);
     }
 
-    /* SECTION 2 */
     .center{ text-align:center; }
 
     .h2{
@@ -270,7 +266,6 @@
       margin-bottom: 4px;
     }
 
-    /* SECTION 3 */
     .quote-title{
       font-family: ui-serif, Georgia, serif;
       font-size: clamp(26px, 4vw, 44px);
@@ -311,7 +306,6 @@
       overflow:hidden;
     }
 
-    /* SECTION 4 */
     .dytm-grid{
       display:grid;
       grid-template-columns: 0.8fr 1.2fr;
@@ -451,7 +445,6 @@
     }
     .word-count.ok{ color: #2a8a2a; opacity: 0.85; }
 
-    /* FOOTER */
     footer{
       position: relative;
       overflow: hidden;
@@ -481,7 +474,6 @@
 
     #d-labubu-1{ top: 90%; }
 
-    /* MOBILE */
     @media (max-width: 700px){
       #top{ padding-bottom: 28px; }
 
@@ -801,8 +793,7 @@
   </footer>
 
   <script>
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxSiIGzawUH6Dvot3-A_NoT0k71qNdbPwsst40H7zQ_tSX410cLncmf5w5hEKqnnt9x
-/exec';
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxSiIGzawUH6Dvot3-A_NoT0k71qNdbPwsst40H7zQ_tSX410cLncmf5w5hEKqnnt9x/exec';
 
     const guestForm   = document.getElementById('guestForm');
     const submitBtn   = document.getElementById('guestSubmitBtn');
@@ -865,7 +856,7 @@
       if (!valid) return;
 
       submitBtn.disabled    = true;
-      submitBtn.textContent = 'Sending…';
+      submitBtn.textContent = 'Sending\u2026';
       formMsg.className     = 'form-message';
       formMsg.textContent   = '';
 
@@ -878,7 +869,7 @@
 
         if (json.result === 'success') {
           formMsg.className   = 'form-message success';
-          formMsg.textContent = '🎉 Got it! We\'ll be in touch if it\'s a match.';
+          formMsg.textContent = 'Got it! We\'ll be in touch if it\'s a match.';
           guestForm.reset();
           wordCountEl.textContent = '0 / ' + MIN_WORDS + ' words';
           wordCountEl.classList.remove('ok');

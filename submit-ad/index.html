@@ -55,7 +55,6 @@
     }
     .page > section:first-of-type { padding-bottom: 16px; }
     .page > section:nth-of-type(2) { padding-top: 16px; }
-
     .section > .wrap {
       position: relative;
       z-index: 3;
@@ -404,9 +403,9 @@
         <p class="page-desc">
           <a href="/" style="text-decoration: underline; color: inherit;">You Know Too Much</a> podcast explores the oddly delightful things people obsess over — hosted by mavenverse co-founders Pamala and Eva.
         </p>
-<p class="page-desc">
-  We're offering free :15 second ad slots to emerging brands building real products for real communities. Pick a template, fill in your details, and we'll review it for air.
-</p>
+        <p class="page-desc">
+          We're offering free :15 second ad slots to emerging brands building real products for real communities. Pick a template, fill in your details, and we'll review it for air.
+        </p>
       </div>
     </section>
     <!-- FORM SECTION -->
@@ -460,38 +459,38 @@
             <!-- TEMPLATE INPUTS -->
             <div id="problemSolve" class="template-inputs">
               <label>The problem (what's broken) *</label>
-              <input type="text" id="problem" name="problem" placeholder="e.g., most protein bars taste like cardboard" maxlength="55">
+              <input type="text" id="problem" name="problem" placeholder="e.g., most protein bars taste like cardboard">
               <span class="field-error" id="problemError"></span>
               <label>Your solution *</label>
-              <input type="text" id="solution" name="solution" placeholder="e.g., we make protein bars that actually taste good" maxlength="65">
+              <input type="text" id="solution" name="solution" placeholder="e.g., we make protein bars that actually taste good">
               <span class="field-error" id="solutionError"></span>
               <label>Call to action *</label>
-              <input type="text" id="ctaProblemSolve" name="ctaProblemSolve" placeholder="e.g., Try [brand] at [website]" maxlength="40">
+              <input type="text" id="ctaProblemSolve" name="ctaProblemSolve" placeholder="e.g., Try [brand] at [website]">
               <span class="field-error" id="ctaProblemSolveError"></span>
             </div>
             <div id="originStory" class="template-inputs hidden">
               <label>Founder or team *</label>
-              <input type="text" id="founder" name="founder" placeholder="e.g., Three former athletes" maxlength="40">
+              <input type="text" id="founder" name="founder" placeholder="e.g., Three former athletes">
               <span class="field-error" id="founderError"></span>
               <label>Why they built it *</label>
-              <input type="text" id="originWhy" name="originWhy" placeholder="e.g., to prove sustainability doesn't have to be boring" maxlength="65">
+              <input type="text" id="originWhy" name="originWhy" placeholder="e.g., to prove sustainability doesn't have to be boring">
               <span class="field-error" id="originWhyError"></span>
               <label>Current impact or milestone *</label>
-              <input type="text" id="impact" name="impact" placeholder="e.g., now in 2000+ stores nationwide" maxlength="55">
+              <input type="text" id="impact" name="impact" placeholder="e.g., now in 2000+ stores nationwide">
               <span class="field-error" id="impactError"></span>
               <label>Call to action *</label>
-              <input type="text" id="ctaOrigin" name="ctaOrigin" placeholder="e.g., Find us at [website]" maxlength="40">
+              <input type="text" id="ctaOrigin" name="ctaOrigin" placeholder="e.g., Find us at [website]">
               <span class="field-error" id="ctaOriginError"></span>
             </div>
             <div id="proof" class="template-inputs hidden">
               <label>Specific result or real example *</label>
-              <textarea id="proofDetail" name="proofDetail" placeholder="e.g., Sarah lost 30 lbs in 6 months. Our customers save 5 hours a week." maxlength="85"></textarea>
+              <textarea id="proofDetail" name="proofDetail" placeholder="e.g., Sarah lost 30 lbs in 6 months. Our customers save 5 hours a week."></textarea>
               <span class="field-error" id="proofDetailError"></span>
               <label>What your brand does (one sentence) *</label>
-              <input type="text" id="proofWhat" name="proofWhat" placeholder="e.g., we make meal plans that actually stick" maxlength="60">
+              <input type="text" id="proofWhat" name="proofWhat" placeholder="e.g., we make meal plans that actually stick">
               <span class="field-error" id="proofWhatError"></span>
               <label>Call to action *</label>
-              <input type="text" id="ctaProof" name="ctaProof" placeholder="e.g., Start free at [website]" maxlength="45">
+              <input type="text" id="ctaProof" name="ctaProof" placeholder="e.g., Start free at [website]">
               <span class="field-error" id="ctaProofError"></span>
             </div>
             <!-- SCRIPT PREVIEW -->
@@ -500,6 +499,7 @@
                 <div class="script-label">Your 15-second script</div>
                 <div id="scriptPreview">Select a template and fill in details to see your script.</div>
                 <div class="timer" id="timer"></div>
+                <span class="field-error" id="scriptLengthError" style="margin-top: 8px; margin-bottom: 0;"></span>
               </div>
             </div>
             <!-- SUBMIT BUTTON -->
@@ -549,6 +549,7 @@
     const successState = document.getElementById('successState');
     const successAgain = document.getElementById('successAgain');
     let selectedTemplate = 'problem-solve';
+    let currentEstSeconds = 0;
 
     // ---- HELPERS ----
     function getSectionId(t) {
@@ -615,13 +616,16 @@
         return;
       }
 
-      const estSeconds = Math.round(wordCount / 2.17); // 130 wpm
+      currentEstSeconds = Math.round(wordCount / 2.17); // 130 wpm
+      const scriptLengthErr = document.getElementById('scriptLengthError');
+      if (scriptLengthErr) scriptLengthErr.textContent = '';
       timerEl.classList.remove('warning');
-      timerEl.textContent = `≈ ${estSeconds} seconds`;
-      if (estSeconds > 16) {
+      timerEl.textContent = `≈ ${currentEstSeconds} seconds`;
+      if (currentEstSeconds > 15) {
         timerEl.classList.add('warning');
-        timerEl.textContent += ' — trim a few words';
-      } else if (estSeconds < 12) {
+        timerEl.textContent += ' — over the 15-second limit';
+        if (scriptLengthErr) scriptLengthErr.textContent = 'Script is too long. Trim it to 15 seconds or under before submitting.';
+      } else if (currentEstSeconds < 12) {
         timerEl.textContent += ' — add more detail for better timing';
       }
     }
@@ -656,6 +660,13 @@
     function validateForm() {
       clearErrors();
       let valid = true;
+
+      if (currentEstSeconds > 15) {
+        const scriptLengthErr = document.getElementById('scriptLengthError');
+        if (scriptLengthErr) scriptLengthErr.textContent = 'Script is too long. Trim it to 15 seconds or under before submitting.';
+        document.querySelector('.script-preview-shell').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return false;
+      }
 
       const brandName    = document.getElementById('brandName').value.trim();
       const category     = document.getElementById('category').value.trim();
@@ -742,13 +753,12 @@
 
       try {
         await fetch(GAS_URL + '?' + new URLSearchParams(data).toString(), {
-        method: 'GET',
-        mode: 'no-cors'
-      });
-} catch (err) {
-  console.error('Fetch error:', err);
-}
-
+          method: 'GET',
+          mode: 'no-cors'
+        });
+      } catch (err) {
+        console.error('Fetch error:', err);
+      }
 
       // Show success state
       form.style.display = 'none';

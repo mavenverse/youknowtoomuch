@@ -8,7 +8,6 @@
   <!-- Favicons -->
   <link rel="icon" type="image/png" sizes="32x32" href="assets/bfav32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/bfav16.png">
-  <!-- optional; only include if you actually have this file -->
   <link rel="apple-touch-icon" sizes="180x180" href="assets/bfav180.png">
 
   <style>
@@ -20,7 +19,6 @@
       --white: #F2F4F3;
       --ink: #111111;
       --hairline-dark: rgba(255,255,255,0.10);
-
       --max: 1120px;
       --pad: 28px;
       --r: 999px;
@@ -36,7 +34,6 @@
       background: var(--green);
     }
 
-    /* The gradient canvas */
     .page{
       background: linear-gradient(
         180deg,
@@ -66,13 +63,10 @@
       background: transparent;
     }
 
-    /* content above doodles */
     .section > .wrap{
       position: relative;
       z-index: 3;
     }
-
-    /* ---------------- DOODLE BACKGROUND SYSTEM ---------------- */
 
     .bg-layer{
       position: absolute;
@@ -90,21 +84,16 @@
       z-index: 1;
     }
 
-    /* if you want a doodle above other doodles but still behind content */
     .bg-doodle.mid{ z-index: 2; }
 
-    /* size tokens */
     .sz-1{ width: 280px; }
     .sz-2{ width: 360px; }
     .sz-3{ width: 460px; }
     .sz-4{ width: 620px; }
-
-    /* squiggles */
     .doodle-xl{ width: 760px; }
     .doodle-lg{ width: 520px; }
 
-    /* ---------------- HERO ---------------- */
-
+    /* HERO */
     .hero-grid{
       display:grid;
       grid-template-columns: 1.2fr 0.9fr;
@@ -115,19 +104,17 @@
       .hero-grid{ grid-template-columns: 1fr; }
     }
 
-.brand-row{
-  display:flex;
-  align-items:center;
-  gap: 10px;
-  margin-bottom: 16px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+    .brand-row{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      margin-bottom: 16px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      color: inherit;
+    }
 
-  /* add this */
-  text-decoration: none;
-  color: inherit;
-}
-    
     .brand-mark{
       width: 26px; height: 26px;
       border-radius: 50%;
@@ -173,8 +160,7 @@
       transform-origin: center left;
     }
 
-    /* ---------------- PILLS ---------------- */
-
+    /* PILLS */
     .pill{
       display:inline-flex;
       align-items:center;
@@ -196,30 +182,21 @@
       border-color: rgba(0,0,0,0.12);
     }
 
- /* ---------------- SECTION 2 ---------------- */
+    /* SECTION 2 */
+    .center{ text-align:center; }
 
-.center{ text-align:center; }
+    .h2{
+      font-family: ui-serif, Georgia, serif;
+      font-weight: 650;
+      font-size: clamp(22px, 3.2vw, 34px);
+      margin: 0 0 22px 0;
+    }
 
-.h2{
-  font-family: ui-serif, Georgia, serif;
-  font-weight: 650;
-  font-size: clamp(22px, 3.2vw, 34px);
-  margin: 0 0 22px 0;
-}
+    .br-desktop{ display: inline; }
+    @media (max-width: 700px){
+      .br-desktop{ display: none; }
+    }
 
-/* keep line break on desktop */
-.br-desktop{
-  display: inline;
-}
-
-/* remove forced break on mobile */
-@media (max-width: 700px){
-  .br-desktop{
-    display: none;
-  }
-}
-
-    /* episodes grid */
     .episodes-grid{
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -293,8 +270,7 @@
       margin-bottom: 4px;
     }
 
-    /* ---------------- SECTION 3 ---------------- */
-
+    /* SECTION 3 */
     .quote-title{
       font-family: ui-serif, Georgia, serif;
       font-size: clamp(26px, 4vw, 44px);
@@ -335,8 +311,7 @@
       overflow:hidden;
     }
 
-    /* ---------------- SECTION 4 ---------------- */
-
+    /* SECTION 4 */
     .dytm-grid{
       display:grid;
       grid-template-columns: 0.8fr 1.2fr;
@@ -354,7 +329,6 @@
       text-transform: uppercase;
     }
 
-    /* guest submission form */
     .guest-form{
       margin-top: 18px;
       border-radius: 18px;
@@ -363,9 +337,7 @@
       padding: 24px 22px;
     }
 
-    .form-field{
-      margin-bottom: 18px;
-    }
+    .form-field{ margin-bottom: 18px; }
 
     .form-field label{
       display: block;
@@ -479,8 +451,7 @@
     }
     .word-count.ok{ color: #2a8a2a; opacity: 0.85; }
 
-    /* ---------------- FOOTER ---------------- */
-
+    /* FOOTER */
     footer{
       position: relative;
       overflow: hidden;
@@ -508,20 +479,12 @@
     }
     .footer-links a:hover{ color: var(--tangerine); }
 
-    /* ---------------- LABUBU (DESKTOP DEFAULT) ----------------
-       Desktop stays perfect: only top is set here.
-       Left stays in the inline style on the img. */
-    #d-labubu-1{
-      top: 90%;
-    }
+    #d-labubu-1{ top: 90%; }
 
-    /* ---------------- MOBILE FIXES ---------------- */
+    /* MOBILE */
     @media (max-width: 700px){
-
-      /* HERO spacing so nothing gets cropped */
       #top{ padding-bottom: 28px; }
 
-      /* Center the hosts container */
       .hero-grid > div:last-child{
         display:flex;
         justify-content:center;
@@ -529,7 +492,6 @@
         margin-top: 14px;
       }
 
-      /* Hosts: bigger + centered */
       .hero-media{
         transform: none !important;
         width: min(520px, 118%);
@@ -537,18 +499,15 @@
         margin: 0 auto;
       }
 
-      /* Doodles calm down on mobile */
       .bg-doodle{
         opacity: 0.35;
         transform: none !important;
       }
 
-      /* keep squiggles, but tuck them in */
       #d-squiggle-1{ top:-40px !important; left:-260px !important; width:520px !important; }
       #d-squiggle-2{ top:-60px !important; right:-260px !important; width:520px !important; }
       #d-squiggle-3{ top:-60px !important; left:-260px !important; width:520px !important; }
 
-      /* hero brain */
       #d-brain-1{
         top: 10px !important;
         left: 48% !important;
@@ -556,16 +515,14 @@
         opacity: 0.45 !important;
       }
 
-      /* labubu: move LEFT on mobile only (your request) */
       #d-labubu-1{
-        left: 38% !important;               /* moved left from 48% */
+        left: 38% !important;
         top: 82% !important;
         width: 320px !important;
         opacity: 0.55 !important;
         transform: translate(-50%,-50%) !important;
       }
 
-      /* section 2 doodles */
       #d-sneakers{
         left: -10px !important;
         top: 120px !important;
@@ -580,7 +537,6 @@
         opacity: 0.45 !important;
       }
 
-      /* dinner */
       #d-dinner{
         right: -120px !important;
         top: 18% !important;
@@ -588,7 +544,6 @@
         opacity: 0.35 !important;
       }
 
-      /* whale */
       #d-whale{
         left: -60px !important;
         bottom: -20% !important;
@@ -596,7 +551,6 @@
         opacity: 0.35 !important;
       }
 
-      /* section 4 brain + dog */
       #d-brain-2{
         left: -30px !important;
         top: 6% !important;
@@ -623,11 +577,8 @@
       <div class="bg-layer">
         <img id="d-squiggle-1" class="bg-doodle doodle-xl" src="assets/squiggle.png"
              style="top:-40px; left:-180px; opacity:0.55;">
-
         <img id="d-brain-1" class="bg-doodle doodle-lg" src="assets/brain.png"
              style="top:40px; left:55%; width:520px; opacity:0.70;">
-
-        <!-- labubu: behind content, above other doodles -->
         <img id="d-labubu-1" class="bg-doodle sz-4 mid" src="assets/labubu.png"
              style="left:48%; transform:translate(-50%,-50%); opacity:0.95;">
       </div>
@@ -635,11 +586,11 @@
       <div class="wrap">
         <div class="hero-grid">
           <div>
-        <a class="brand-row" href="https://mavenverse.com" target="_blank" rel="noopener noreferrer">
-  <span style="font-weight:400; opacity:0.70; font-size:13px; margin-right:2px;">presented by</span>
-  <div class="brand-mark">m</div>
-  <div>mavenverse</div>
-</a>
+            <a class="brand-row" href="https://mavenverse.com" target="_blank" rel="noopener noreferrer">
+              <span style="font-weight:400; opacity:0.70; font-size:13px; margin-right:2px;">presented by</span>
+              <div class="brand-mark">m</div>
+              <div>mavenverse</div>
+            </a>
 
             <h1 class="hero-title">YOU KNOW<br/>TOO MUCH</h1>
 
@@ -665,78 +616,74 @@
       </div>
     </section>
 
-    <!-- SECTION 2 VIDEO -->
+    <!-- SECTION 2 EPISODES -->
     <section class="section" id="latest">
       <div class="bg-layer">
         <img id="d-squiggle-2" class="bg-doodle doodle-xl" src="assets/squiggle.png"
              style="top:-20px; right:-180px; transform:scaleX(-1); opacity:0.45;">
-
         <img id="d-baby" class="bg-doodle sz-3" src="assets/baby.png"
              style="right:6%; top:58%; opacity:0.90;">
-
         <img id="d-sneakers" class="bg-doodle sz-2" src="assets/sneakers.png"
              style="left:4%; top:190px; opacity:0.90;">
       </div>
 
-<div class="wrap center">
-  <div class="h2">
-    Everything you’ve ever wanted to know
-    <br class="br-desktop" />
-    about that thing you didn’t know about.
-  </div>
+      <div class="wrap center">
+        <div class="h2">
+          Everything you've ever wanted to know
+          <br class="br-desktop" />
+          about that thing you didn't know about.
+        </div>
 
-  <div class="episodes-grid">
+        <div class="episodes-grid">
+          <div class="episode-card">
+            <div class="episode-thumb">
+              <div class="episode-thumb-label">Episode</div>
+              <div class="episode-thumb-num">01</div>
+              <div class="episode-thumb-coming">Coming Soon</div>
+            </div>
+            <div class="episode-caption">
+              <strong>Episode 1</strong>
+              Stay tuned.
+            </div>
+          </div>
 
-    <div class="episode-card">
-      <div class="episode-thumb">
-        <div class="episode-thumb-label">Episode</div>
-        <div class="episode-thumb-num">01</div>
-        <div class="episode-thumb-coming">Coming Soon</div>
-      </div>
-      <div class="episode-caption">
-        <strong>Episode 1</strong>
-        Stay tuned.
-      </div>
-    </div>
+          <div class="episode-card">
+            <div class="episode-thumb">
+              <div class="episode-thumb-label">Episode</div>
+              <div class="episode-thumb-num">02</div>
+              <div class="episode-thumb-coming">Coming Soon</div>
+            </div>
+            <div class="episode-caption">
+              <strong>Episode 2</strong>
+              Stay tuned.
+            </div>
+          </div>
 
-    <div class="episode-card">
-      <div class="episode-thumb">
-        <div class="episode-thumb-label">Episode</div>
-        <div class="episode-thumb-num">02</div>
-        <div class="episode-thumb-coming">Coming Soon</div>
-      </div>
-      <div class="episode-caption">
-        <strong>Episode 2</strong>
-        Stay tuned.
-      </div>
-    </div>
+          <div class="episode-card">
+            <div class="episode-thumb">
+              <div class="episode-thumb-label">Episode</div>
+              <div class="episode-thumb-num">03</div>
+              <div class="episode-thumb-coming">Coming Soon</div>
+            </div>
+            <div class="episode-caption">
+              <strong>Episode 3</strong>
+              Stay tuned.
+            </div>
+          </div>
 
-    <div class="episode-card">
-      <div class="episode-thumb">
-        <div class="episode-thumb-label">Episode</div>
-        <div class="episode-thumb-num">03</div>
-        <div class="episode-thumb-coming">Coming Soon</div>
+          <div class="episode-card">
+            <div class="episode-thumb">
+              <div class="episode-thumb-label">Episode</div>
+              <div class="episode-thumb-num">04</div>
+              <div class="episode-thumb-coming">Coming Soon</div>
+            </div>
+            <div class="episode-caption">
+              <strong>Episode 4</strong>
+              Stay tuned.
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="episode-caption">
-        <strong>Episode 3</strong>
-        Stay tuned.
-      </div>
-    </div>
-
-    <div class="episode-card">
-      <div class="episode-thumb">
-        <div class="episode-thumb-label">Episode</div>
-        <div class="episode-thumb-num">04</div>
-        <div class="episode-thumb-coming">Coming Soon</div>
-      </div>
-      <div class="episode-caption">
-        <strong>Episode 4</strong>
-        Stay tuned.
-      </div>
-    </div>
-
-  </div>
-</div>
     </section>
 
     <!-- SECTION 3 QUOTES -->
@@ -744,17 +691,16 @@
       <div class="bg-layer">
         <img id="d-squiggle-3" class="bg-doodle doodle-xl" src="assets/squiggle.png"
              style="top:-80px; left:-200px; opacity:0.40;">
-
         <img id="d-dinner" class="bg-doodle sz-4" src="assets/dinner.png"
              style="right:-2%; top:14%; opacity:0.75;">
       </div>
 
       <div class="wrap">
-        <div class="quote-title">“How do you even know that?”</div>
+        <div class="quote-title">"How do you even know that?"</div>
 
         <div class="quote-grid">
           <div class="quote-card">
-            <p>“My knowledge of the LinkedIn algorithm was gained against my will out of pure survival!”</p>
+            <p>"My knowledge of the LinkedIn algorithm was gained against my will out of pure survival!"</p>
             <div class="quote-person">
               <span>Jane Smith</span>
               <div class="avatar"><img src="assets/avatar-1.jpg" alt=""></div>
@@ -762,7 +708,7 @@
           </div>
 
           <div class="quote-card">
-            <p>“I’ve become an expert on the building across from my apartment. Is that weird?”</p>
+            <p>"I've become an expert on the building across from my apartment. Is that weird?"</p>
             <div class="quote-person">
               <span>John Smith</span>
               <div class="avatar"><img src="assets/avatar-2.jpg" alt=""></div>
@@ -770,7 +716,7 @@
           </div>
 
           <div class="quote-card">
-            <p>“I have been studying ideas for 34 years. And I think I may just be starting to get it.”</p>
+            <p>"I have been studying ideas for 34 years. And I think I may just be starting to get it."</p>
             <div class="quote-person">
               <span>Tom Christmann</span>
               <div class="avatar"><img src="assets/avatar-3.jpg" alt=""></div>
@@ -780,15 +726,13 @@
       </div>
     </section>
 
-    <!-- SECTION 4 TYPEFORM -->
+    <!-- SECTION 4 GUEST FORM -->
     <section class="section" id="guest">
       <div class="bg-layer">
         <img id="d-whale" class="bg-doodle sz-4" src="assets/whale.png"
              style="left:2%; bottom:-55%; opacity:0.90;">
-
         <img id="d-brain-2" class="bg-doodle sz-3" src="assets/brain.png"
              style="left:10%; top:18%; opacity:0.85;">
-
         <img id="d-dog" class="bg-doodle sz-3" src="assets/dog.png"
              style="right:-6%; top:40%; opacity:0.85;">
       </div>
@@ -835,17 +779,16 @@
 
   </main>
 
-  <!-- FOOTER (solid #1F271B) -->
+  <!-- FOOTER -->
   <footer>
     <div class="wrap">
       <div class="footer-inner">
         <div>
-        <a href="https://mavenverse.com" target="_blank" rel="noopener noreferrer"
-   style="color:inherit; text-decoration:none; font-weight:800;">
-  mavenverse
-</a><br/>
-          <span style="opacity:0.75;"> Brands don't need influencers. They need communities. mavenverse connects them to trusted, high-performing groups that don't accept outside influence lightly, from book clubs to mom groups to niche hobbyists. We vet community leaders, protect their trust, and only bring in brands that belong. It's earned proximity at scale, not media buying. Want to hear more? Contact us below.
-          </span>
+          <a href="https://mavenverse.com" target="_blank" rel="noopener noreferrer"
+             style="color:inherit; text-decoration:none; font-weight:800;">
+            mavenverse
+          </a><br/>
+          <span style="opacity:0.75;">Brands don't need influencers. They need communities. mavenverse connects them to trusted, high-performing groups that don't accept outside influence lightly, from book clubs to mom groups to niche hobbyists. We vet community leaders, protect their trust, and only bring in brands that belong. It's earned proximity at scale, not media buying. Want to hear more? Contact us below.</span>
         </div>
 
         <div class="footer-links">
@@ -858,13 +801,13 @@
   </footer>
 
   <script>
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz7PkMF3cG_1sOw6A_wpEJ0YnnVW6BN2jdasO1HXh6CpD9CteIaKcTjRRvKnX7GyDSh/exec';
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzKZ5aHyU7ifduv8JkAQU6CIcuVz_4OLi7pjZ_Ao57Odlo7E8ugPzZs43DEvZbZkyO6/exec';
 
-    const guestForm  = document.getElementById('guestForm');
-    const submitBtn  = document.getElementById('guestSubmitBtn');
-    const formMsg    = document.getElementById('guestFormMsg');
-    const topicEl    = document.getElementById('gf-topic');
-    const wordCountEl= document.getElementById('word-count');
+    const guestForm   = document.getElementById('guestForm');
+    const submitBtn   = document.getElementById('guestSubmitBtn');
+    const formMsg     = document.getElementById('guestFormMsg');
+    const topicEl     = document.getElementById('gf-topic');
+    const wordCountEl = document.getElementById('word-count');
 
     const MIN_WORDS = 50;
 
@@ -888,7 +831,6 @@
       }
     }
 
-    // Live word counter on the topic field
     topicEl.addEventListener('input', function() {
       const words = countWords(topicEl.value);
       wordCountEl.textContent = words + ' / ' + MIN_WORDS + ' words';
@@ -900,7 +842,6 @@
       }
     });
 
-    // Clear field errors on input
     document.getElementById('gf-name').addEventListener('input', function() {
       if (this.value.trim()) setError('gf-name', 'err-name', false);
     });
@@ -916,22 +857,10 @@
       const topic = topicEl.value.trim();
       const words = countWords(topic);
 
-      // Validate all fields and show specific errors
       let valid = true;
-
-      if (!name) {
-        setError('gf-name', 'err-name', true);
-        valid = false;
-      }
-      if (!email || !isValidEmail(email)) {
-        setError('gf-email', 'err-email', true);
-        valid = false;
-      }
-      if (!topic || words < MIN_WORDS) {
-        setError('gf-topic', 'err-topic', true);
-        valid = false;
-      }
-
+      if (!name) { setError('gf-name', 'err-name', true); valid = false; }
+      if (!email || !isValidEmail(email)) { setError('gf-email', 'err-email', true); valid = false; }
+      if (!topic || words < MIN_WORDS) { setError('gf-topic', 'err-topic', true); valid = false; }
       if (!valid) return;
 
       submitBtn.disabled    = true;
